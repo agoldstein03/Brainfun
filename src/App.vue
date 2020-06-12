@@ -66,11 +66,37 @@ export default {
   height: 70vh;
 }
 
-.top {
+#top {
   height: 10vh;
 }
 
-.bottom {
+#bottom {
   height: 20vh;
+}
+
+
+.container {
+  position: relative;
+  padding: 8px;
+  justify-content: center;
+  align-items: center;
+  background-color: green;
+  margin-bottom: 0px;
+  height: 100%;
+}
+
+.label {
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    background-color: green;
+    color: white;
+    padding: 8px;
+}
+
+.content {
+    height: 100%;
+    width: 100%;
+    background-color: white;
 }
 </style>

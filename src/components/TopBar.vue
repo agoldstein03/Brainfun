@@ -1,15 +1,13 @@
 <template>
   <div>
-    <md-toolbar class="md-primary">
-      <span class="md-title">Title</span>
-      <div class="md-toolbar-section-end">
-        <md-button class="md-icon-button" @click="showNavigation = true">
+    <md-toolbar class="md-primary md-elevation-8">
+      <md-button class="md-icon-button" @click="showNavigation = true">
           <md-icon>menu</md-icon>
         </md-button>
-      </div>
+      <span class="md-title">Title</span>
     </md-toolbar>
 
-    <md-drawer class="md-right" :md-active.sync="showNavigation">
+    <md-drawer :md-active.sync="showNavigation">
       <md-toolbar class="md-transparent" md-elevation="0">
         <span class="md-title">Menu</span>
       </md-toolbar>
@@ -39,9 +37,5 @@
   .md-drawer {
     width: 230px;
     max-width: calc(100vw - 125px);
-  }
-
-  .md-content {
-    padding: 16px;
   }
 </style>

@@ -1,6 +1,11 @@
 <template>
-  <div class="md-content">
-    Execute
+  <div class="container md-elevation-8">
+    <div class="label md-elevation-8">
+        Execute
+    </div>
+    <div class="content">
+        Hello
+    </div>
   </div>
 </template>
 
@@ -17,13 +22,11 @@
 
 <style lang="scss" scoped>
 
-  .md-content {
-    padding: 16px;
-    justify-content: center;
-    align-items: center;
-    background: purple;
-    color: white;
-    margin-bottom: 0px;
-    height: 100%;
+  .container {
+    background-color: purple;
+  }
+
+  .label {
+      background-color: purple;
   }
 </style>
