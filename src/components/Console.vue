@@ -1,7 +1,7 @@
 <template>
   <div class="consoleContainer md-elevation-8">
     <md-field id="editor">
-      <md-textarea :key="key" md-autogrow v-model="code" @input="highlight()"></md-textarea>
+      <md-textarea :key="key" md-autogrow v-model="code" @input="format()"></md-textarea>
     </md-field>
     <Play id="play" />
     <Submit id="submit" />
@@ -24,11 +24,12 @@ export default {
     };
   },
   methods: {
-    highlight: function() {
-      let newCode = this.code.replace(/[^<>+-.,[\]\n]+/g, "")
+    format: function() {
+      let newCode = this.code.replace(/[^<>+-.,[\]\n\r\t\s]+/g, "")
       if (this.code !== newCode) {
         this.code = newCode
         this.key++
+        
       }
     },
     addChar: function(char) {
@@ -79,7 +80,7 @@ export default {
   color: white;
   font-size: 24px !important;
   padding: 16px !important;
-  margin-right: 52px;
+  padding-right: 52px !important;
   height: 100% !important;
   max-height: 100% !important;
 }

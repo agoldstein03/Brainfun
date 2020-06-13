@@ -13,13 +13,13 @@
             <Console ref="console"/>
           </div>
           <div id="commands" class="md-layout-item">
-            <Commands v-on:command="addCommand"/>
+            <Commands v-on:command="runCommand"/>
           </div>
         </div>
       </div>
     </div>
     <div id="bottom">
-      <TapeVisualizer />
+      <TapeVisualizer ref="tape"/>
     </div>
   </div>
 </template>
@@ -41,8 +41,17 @@ export default {
     Commands
   },
   methods: {
-    addCommand(command) {
+    runCommand(command) {
       this.$refs.console.addChar(command)
+      if (command === "<") {
+        this.$refs.tape.left()
+      } else if (command === ">") {
+        this.$refs.tape.right()
+      } else if (command === "+") {
+        this.$refs.tape.add()
+      } else if (command === "-") {
+        this.$refs.tape.subtract()
+      }
     }
   }
 };
