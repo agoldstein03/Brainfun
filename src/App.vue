@@ -11,8 +11,6 @@
         <div id="right" class="md-layout">
           <div id="console" class="md-layout-item">
             <Console />
-            <Play id="play"/>
-            <Submit id="submit"/>
           </div>
           <div id="commands" class="md-layout-item">
             <Commands />
@@ -32,8 +30,6 @@ import Directions from "./components/Directions.vue";
 import Console from "./components/Console.vue";
 import TapeVisualizer from "./components/TapeVisualizer.vue";
 import Commands from "./components/Commands.vue";
-import Play from "./components/Play.vue";
-import Submit from "./components/Submit.vue";
 
 export default {
   name: "App",
@@ -42,19 +38,26 @@ export default {
     Directions,
     Console,
     TapeVisualizer,
-    Commands,
-    Play,
-    Submit
+    Commands
   },
 };
 </script>
 
 <style lang="scss">
+
+body {
+  height: 100%;
+  min-height: 100%;
+}
+
 #app {
   font-family: Roboto, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
 }
 
 #right {
@@ -64,15 +67,20 @@ export default {
 }
 
 #middle {
-  height: 70vh;
+  flex: 1 1;
+  display: flex;
+  flex-direction: row;
+  //height: 70vh;
 }
 
 #top {
-  height: 10vh;
+  flex: 0 0;
+  //height: 10vh;
 }
 
 #bottom {
-  height: 20vh;
+  flex: 0 0;
+  //height: 20vh;
 }
 
 .container {
