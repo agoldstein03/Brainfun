@@ -192,6 +192,7 @@ export default {
   width: 3.5ch;
   border-left: 3px darkgrey solid;
   display: inline-block;
+  text-align: center;
 
   &:last-child {
     border-right: 3px darkgrey solid;
@@ -199,11 +200,7 @@ export default {
 }
 
 .container {
-  overflow: hidden;
-  background-color: red;
+  overflow-x: hidden;
 }
 
-.label {
-  background-color: red;
-}
 </style>
