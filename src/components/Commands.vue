@@ -1,47 +1,45 @@
 <template>
   <div class="container">
     <div class="content">
-      <div class="md-layout">
-        <div class="md-layout-item">
-          <md-button class="md-icon-button md-raised md-primary">
-            <h1>&lt;</h1>
-          </md-button>
-        </div>
-        <div class="md-layout-item">
-          <md-button class="md-icon-button md-raised md-primary">
-            <h1>&gt;</h1>
-          </md-button>
-        </div>
-        <div class="md-layout-item">
-          <md-button class="md-icon-button md-raised md-primary">
-            <h1>&plus;</h1>
-          </md-button>
-        </div>
-        <div class="md-layout-item">
-          <md-button class="md-icon-button md-raised md-primary">
-            <h1>&minus;</h1>
-          </md-button>
-        </div>
-        <div class="md-layout-item">
-          <md-button class="md-icon-button md-raised md-primary">
-            <h1>.</h1>
-          </md-button>
-        </div>
-        <div class="md-layout-item">
-          <md-button class="md-icon-button md-raised md-primary">
-            <h1>,</h1>
-          </md-button>
-        </div>
-        <div class="md-layout-item">
-          <md-button class="md-icon-button md-raised md-primary">
-            <h1>[</h1>
-          </md-button>
-        </div>
-        <div class="md-layout-item">
-          <md-button class="md-icon-button md-raised md-primary">
-            <h1>]</h1>
-          </md-button>
-        </div>
+      <div class="button">
+        <md-button class="md-icon-button md-raised md-primary">
+          <h1>&lt;</h1>
+        </md-button>
+      </div>
+      <div class="button">
+        <md-button class="md-icon-button md-raised md-primary">
+          <h1>&gt;</h1>
+        </md-button>
+      </div>
+      <div class="button">
+        <md-button class="md-icon-button md-raised md-primary">
+          <h1>&plus;</h1>
+        </md-button>
+      </div>
+      <div class="button">
+        <md-button class="md-icon-button md-raised md-primary">
+          <h1>&minus;</h1>
+        </md-button>
+      </div>
+      <div class="button">
+        <md-button class="md-icon-button md-raised md-primary">
+          <h1>.</h1>
+        </md-button>
+      </div>
+      <div class="button">
+        <md-button class="md-icon-button md-raised md-primary">
+          <h1>,</h1>
+        </md-button>
+      </div>
+      <div class="button">
+        <md-button class="md-icon-button md-raised md-primary">
+          <h1>[</h1>
+        </md-button>
+      </div>
+      <div class="button">
+        <md-button class="md-icon-button md-raised md-primary">
+          <h1>]</h1>
+        </md-button>
       </div>
     </div>
   </div>
@@ -61,24 +59,41 @@ export default {
 <style lang="scss" scoped>
 @import "~vue-material/dist/theme/engine";
 
-@include md-register-theme("default", (
-  primary: #ffffff
-));
+@include md-register-theme(
+  "default",
+  (
+    primary: #ffffff,
+  )
+);
 
 @import "~vue-material/dist/components/MdButton/theme";
 
 .container {
-  background-image: linear-gradient(to left, #ffa207, #ff901b, #ff7f2a, #ff6d36, #ff5b42, #ff4d4e, #ff3e5a, #ff2e67, #ff1f78, #ff0e8a, #ff039d, #ff0bb2);
+  background-image: linear-gradient(
+    to left,
+    #ffa207,
+    #ff901b,
+    #ff7f2a,
+    #ff6d36,
+    #ff5b42,
+    #ff4d4e,
+    #ff3e5a,
+    #ff2e67,
+    #ff1f78,
+    #ff0e8a,
+    #ff039d,
+    #ff0bb2
+  );
   overflow: auto;
-  display: flex;
-  align-items: center;
 }
 
 .content {
   margin: 0 auto;
+  text-align: center;
 }
 
-.md-layout-item {
-  margin-bottom: 5px;
+.button {
+  margin: 10px;
+  display: inline-block;
 }
 </style>

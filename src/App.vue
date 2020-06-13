@@ -9,11 +9,11 @@
       </div>
       <div class="md-layout-item" style="border-left:3px solid black">
         <div id="middle" class="md-layout">
-          <div id="console" class="md-layout-item md-size-100" style="height:80%">
+          <div id="console" class="md-layout-item md-size-100" style="height:85%">
             <Console />
             <Play id="play"/>
           </div>
-          <div id="commands" class="md-layout-item md-size-100" style="height:20%">
+          <div id="commands" class="md-layout-item md-size-100" style="height:15%">
             <Commands />
           </div>
         </div>
