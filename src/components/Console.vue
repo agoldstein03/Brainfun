@@ -1,12 +1,15 @@
 <template>
-  <div class="consoleContainer md-elevation-8">
+  <div class="container md-elevation-8">
     <md-field id="editor">
-      <md-textarea :key="key" md-autogrow v-model="code" @input="format()"></md-textarea>
+      <md-textarea :key="key" md-autogrow v-model="code"></md-textarea>
     </md-field>
-    <Play id="play" />
-    <Submit id="submit" />
-  </div>
+    <div class="buttons">
+      <Play id="play" />
+      <Submit id="submit" />
+    </div>
+    </div>
 </template>
+
 <script>
 import Play from "./Play.vue";
 import Submit from "./Submit.vue";
@@ -39,7 +42,12 @@ export default {
 };
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
+
+$consolePadding: 16px;
+$buttonsLeftSpace: $consolePadding / 2;
+$buttonVerticalSpace: $consolePadding / 2;
+
 // Careful! THIS IS NOT SCOPED
 /*
 .editor {
@@ -47,16 +55,32 @@ export default {
   & > 
 }*/
 
-.consoleContainer {
+#editor {
+  flex: 1 1;
+}
+
+.buttons {
+  flex: 0 0;
+  margin-left: $buttonsLeftSpace;
+}
+
+.container {
   //width: 50vw;
   //overflow: auto;
+  display: flex;
   position: relative;
   background-color: rgb(69, 69, 69);
-  min-height: 112px;
+  //min-height: 112px;
+  padding: $consolePadding;
   height: 100%;
   font-family: "Courier New", Courier, monospace;
 }
 
+#submit {
+  margin-top: $buttonVerticalSpace;
+}
+
+/*
 #play {
   position: absolute;
   top: 10px;
@@ -68,7 +92,7 @@ export default {
   top: 60px;
   right: 10px;
 }
-
+*/
 #editor {
   height: 100%;
   margin: 0px;
@@ -79,8 +103,10 @@ export default {
 .md-textarea {
   color: white;
   font-size: 24px !important;
-  padding: 16px !important;
-  padding-right: 52px !important;
+  //padding: 16px !important;
+  //padding-right: 52px !important;
+  padding: 0 !important;
+  overflow: auto !important;
   height: 100% !important;
   max-height: 100% !important;
 }

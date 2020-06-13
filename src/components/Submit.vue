@@ -21,4 +21,10 @@ export default {
 ));
 
 @import "~vue-material/dist/components/MdButton/theme";
+
+.md-icon-button {
+  margin-right: 0;
+  margin-left: 0;
+}
+
 </style>
