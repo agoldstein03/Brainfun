@@ -9,7 +9,7 @@
 <script>
 export default {
   name: "Play",
-  data: function() {},
+  data: function() {return {}},
 };
 </script>
 

@@ -9,7 +9,7 @@
 <script>
 export default {
   name: "Submit",
-  data: function() {},
+  data: function() {return {}},
 };
 </script>
 
