@@ -49,7 +49,7 @@ export default {
 };
 </script>
 
-<style>
+<style lang="scss">
 #app {
   font-family: Roboto, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
