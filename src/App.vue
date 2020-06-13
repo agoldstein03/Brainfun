@@ -10,16 +10,16 @@
       <div class="md-layout-item" style="border-left:3px solid black">
         <div id="right" class="md-layout">
           <div id="console" class="md-layout-item">
-            <Console />
+            <Console ref="console"/>
           </div>
           <div id="commands" class="md-layout-item">
-            <Commands />
+            <Commands v-on:command="runCommand"/>
           </div>
         </div>
       </div>
     </div>
     <div id="bottom">
-      <TapeVisualizer />
+      <TapeVisualizer ref="tape"/>
     </div>
   </div>
 </template>
@@ -40,6 +40,20 @@ export default {
     TapeVisualizer,
     Commands
   },
+  methods: {
+    runCommand(command) {
+      this.$refs.console.addChar(command)
+      if (command === "<") {
+        this.$refs.tape.left()
+      } else if (command === ">") {
+        this.$refs.tape.right()
+      } else if (command === "+") {
+        this.$refs.tape.add()
+      } else if (command === "-") {
+        this.$refs.tape.subtract()
+      }
+    }
+  }
 };
 </script>
 
@@ -101,18 +115,6 @@ body {
 #commands {
   flex: 0 0;
   z-index: 0;
-}
-
-#play {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-}
-
-#submit {
-  position: absolute;
-  top: 60px;
-  right: 10px;
 }
 
 </style>
