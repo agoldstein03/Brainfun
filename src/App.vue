@@ -8,13 +8,13 @@
         <Directions />
       </div>
       <div class="md-layout-item" style="border-left:3px solid black">
-        <div id="middle" class="md-layout">
-          <div id="console" class="md-layout-item md-size-100" style="height:85%">
+        <div id="right" class="md-layout">
+          <div id="console" class="md-layout-item">
             <Console />
             <Play id="play"/>
             <Submit id="submit"/>
           </div>
-          <div id="commands" class="md-layout-item md-size-100" style="height:15%">
+          <div id="commands" class="md-layout-item">
             <Commands />
           </div>
         </div>
@@ -57,6 +57,12 @@ export default {
   color: #2c3e50;
 }
 
+#right {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
 #middle {
   height: 70vh;
 }
@@ -80,12 +86,12 @@ export default {
 }
 
 #console {
-  position: relative;
+  flex: 1 1;
   z-index: 1;
 }
 
 #commands {
-  position: relative;
+  flex: 0 0;
   z-index: 0;
 }
 
