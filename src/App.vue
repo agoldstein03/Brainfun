@@ -10,10 +10,10 @@
       <div class="md-layout-item" style="border-left:3px solid black">
         <div id="right" class="md-layout">
           <div id="console" class="md-layout-item">
-            <Console />
+            <Console ref="console"/>
           </div>
           <div id="commands" class="md-layout-item">
-            <Commands />
+            <Commands v-on:command="addCommand"/>
           </div>
         </div>
       </div>
@@ -40,6 +40,11 @@ export default {
     TapeVisualizer,
     Commands
   },
+  methods: {
+    addCommand(command) {
+      this.$refs.console.addChar(command)
+    }
+  }
 };
 </script>
 
@@ -101,18 +106,6 @@ body {
 #commands {
   flex: 0 0;
   z-index: 0;
-}
-
-#play {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-}
-
-#submit {
-  position: absolute;
-  top: 60px;
-  right: 10px;
 }
 
 </style>

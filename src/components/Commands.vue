@@ -2,42 +2,42 @@
   <div class="container">
     <div class="content">
       <div class="button">
-        <md-button class="md-icon-button md-raised md-primary">
+        <md-button @click="pushCommand('<')" class="md-icon-button md-raised md-primary">
           <h1>&lt;</h1>
         </md-button>
       </div>
       <div class="button">
-        <md-button class="md-icon-button md-raised md-primary">
+        <md-button @click="pushCommand('>')" class="md-icon-button md-raised md-primary">
           <h1>&gt;</h1>
         </md-button>
       </div>
       <div class="button">
-        <md-button class="md-icon-button md-raised md-primary">
+        <md-button @click="pushCommand('+')" class="md-icon-button md-raised md-primary">
           <h1>&plus;</h1>
         </md-button>
       </div>
       <div class="button">
-        <md-button class="md-icon-button md-raised md-primary">
+        <md-button @click="pushCommand('-')" class="md-icon-button md-raised md-primary">
           <h1>&minus;</h1>
         </md-button>
       </div>
       <div class="button">
-        <md-button class="md-icon-button md-raised md-primary">
+        <md-button @click="pushCommand('.')" class="md-icon-button md-raised md-primary">
           <h1>.</h1>
         </md-button>
       </div>
       <div class="button">
-        <md-button class="md-icon-button md-raised md-primary">
+        <md-button @click="pushCommand(',')" class="md-icon-button md-raised md-primary">
           <h1>,</h1>
         </md-button>
       </div>
       <div class="button">
-        <md-button class="md-icon-button md-raised md-primary">
+        <md-button @click="pushCommand('[')" class="md-icon-button md-raised md-primary">
           <h1>[</h1>
         </md-button>
       </div>
       <div class="button">
-        <md-button class="md-icon-button md-raised md-primary">
+        <md-button @click="pushCommand(']')" class="md-icon-button md-raised md-primary">
           <h1>]</h1>
         </md-button>
       </div>
@@ -53,6 +53,11 @@ export default {
       text: "",
     };
   },
+  methods: {
+    pushCommand(command) {
+      this.$emit("command", command)
+    }
+  }
 };
 </script>
 
