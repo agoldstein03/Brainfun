@@ -90,6 +90,9 @@ export default {
     #ff0bb2
   );
   overflow: auto;
+
+  box-shadow: 
+    inset 0px -9px 8px -10px black;  
 }
 
 .content {

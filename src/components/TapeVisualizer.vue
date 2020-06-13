@@ -1,5 +1,5 @@
 <template>
-  <div class="container md-elevation-24">
+  <div class="container">
     <div class="content">
       <transition-group name="cells" tag="div" :class="{cells: true, 'up': up, 'down': !up}">
         <span class="md-display-3 cell" v-for="{value, originalIndex} in displayGrid" :key="originalIndex">

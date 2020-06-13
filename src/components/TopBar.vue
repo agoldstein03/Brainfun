@@ -37,7 +37,7 @@ export default {
   primary: #ffffff
 ));
 
-@import "~vue-material/dist/components/MdToolbar/theme";
+@import "~vue-material/dist/components/MdDrawer/theme";
 
 .md-toolbar {
   height: 10vh;

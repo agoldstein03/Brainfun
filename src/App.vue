@@ -19,7 +19,7 @@
       </div>
     </div>
     <div id="bottom">
-      <TapeVisualizer ref="tape"/>
+      <TapeVisualizer id="tape" ref="tape"/>
     </div>
   </div>
 </template>
@@ -109,12 +109,10 @@ body {
 
 #console {
   flex: 1 1;
-  z-index: 1;
 }
 
 #commands {
   flex: 0 0;
-  z-index: 0;
 }
 
 </style>

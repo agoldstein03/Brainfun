@@ -1,13 +1,20 @@
 <template>
-  <div class="container md-elevation-8">
+  <div class="container">
     <md-field id="editor">
-      <md-textarea :key="key" md-autogrow v-model="code"></md-textarea>
+      <p id="formatted" class="code" spellcheck="false"></p>
+      <md-textarea
+        class="code"
+        :key="key"
+        md-autogrow
+        v-model="code"
+        @input="format()"
+      ></md-textarea>
     </md-field>
     <div class="buttons">
       <Play id="play" />
       <Submit id="submit" />
     </div>
-    </div>
+  </div>
 </template>
 
 <script>
@@ -24,26 +31,49 @@ export default {
     return {
       code: "",
       key: 0,
+      commands: [
+        "<",
+        ">",
+        "+",
+        "-",
+        ".",
+        ",",
+        "[",
+        "]"
+      ],
+      colors: [
+        "#63b598",
+        "#ce7d78",
+        "#ea9e70",
+        "#a48a9e",
+        "#c6e1e8",
+        "#648177",
+        "#0d5ac1",
+        "#f205e6",
+      ],
     };
   },
   methods: {
     format: function() {
-      let newCode = this.code.replace(/[^<>+-.,[\]\n\r\t\s]+/g, "")
-      if (this.code !== newCode) {
-        this.code = newCode
-        this.key++
-        
+      let formatted = ``;
+      for (const c of this.code) {
+        const index = this.commands.indexOf(c)
+        if (c !== -1) {
+          formatted += `<span style="color: ${this.colors[index]}">${c}</span>`;
+        } else {
+          formatted += c
+        }
       }
+      this.$el.querySelector("#formatted").innerHTML = formatted;
     },
     addChar: function(char) {
-      this.code = this.code.concat(char)
-    }
-  }
+      this.code = this.code.concat(char);
+    },
+  },
 };
 </script>
 
 <style lang="scss" scoped>
-
 $consolePadding: 16px;
 $buttonsLeftSpace: $consolePadding / 2;
 $buttonVerticalSpace: $consolePadding / 2;
@@ -74,6 +104,8 @@ $buttonVerticalSpace: $consolePadding / 2;
   padding: $consolePadding;
   height: 100%;
   font-family: "Courier New", Courier, monospace;
+
+  box-shadow: inset 0px -9px 8px -10px black;
 }
 
 #submit {
@@ -100,14 +132,29 @@ $buttonVerticalSpace: $consolePadding / 2;
   display: flex;
 }
 
-.md-textarea {
+#formatted {
+  word-wrap: break-word;
+}
+
+.code {
+  position: absolute;
+  top: 0px;
+  left: 0px;
   color: white;
+  letter-spacing: 0.01em;
+  line-height: 30px !important;
   font-size: 24px !important;
   //padding: 16px !important;
   //padding-right: 52px !important;
+  margin: 0 !important;
   padding: 0 !important;
-  overflow: auto !important;
   height: 100% !important;
   max-height: 100% !important;
+  width: 100%;
+}
+
+.md-textarea {
+  color: white;
+  -webkit-text-fill-color: transparent;
 }
 </style>
