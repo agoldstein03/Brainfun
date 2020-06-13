@@ -102,7 +102,7 @@ export default {
 }
 
 .num-enter-active, .num-leave-active {
-  transition: transform var(--transformTime) .5s, opacity calc(.75*var(--transformTime)) .5s, 
+  transition: transform var(--transformTime) .5s, opacity calc(.75*var(--transformTime)) .5s,
 }
 
 .num-enter {

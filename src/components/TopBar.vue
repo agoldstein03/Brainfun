@@ -1,14 +1,14 @@
 <template>
-  <div>
-    <md-toolbar class="md-primary md-elevation-8">
+  <div class="topbar">
+    <md-toolbar class="md-primary">
       <md-button class="md-icon-button" @click="showNavigation = true">
-          <md-icon>menu</md-icon>
-        </md-button>
-      <span class="md-title">Title</span>
+        <md-icon>menu</md-icon>
+      </md-button>
+      <span class="md-title"><b>BrainFUN</b></span>
     </md-toolbar>
 
     <md-drawer :md-active.sync="showNavigation">
-      <md-toolbar class="md-transparent" md-elevation="0">
+      <md-toolbar md-elevation="0">
         <span class="md-title">Menu</span>
       </md-toolbar>
 
@@ -22,20 +22,29 @@
 </template>
 
 <script>
-  export default {
-    name: 'TopBar',
-    data: () => ({
-      showNavigation: false,
-    })
-  }
+export default {
+  name: "TopBar",
+  data: () => ({
+    showNavigation: false,
+  }),
+};
 </script>
 
 <style lang="scss" scoped>
-  .md-toolbar {
-    height: 10vh;
-  }
-  .md-drawer {
-    width: 230px;
-    max-width: calc(100vw - 125px);
-  }
+@import "~vue-material/dist/theme/engine";
+
+@include md-register-theme("default", (
+  primary: #ffffff
+));
+
+@import "~vue-material/dist/components/MdToolbar/theme";
+
+.md-toolbar {
+  height: 10vh;
+}
+
+.md-drawer {
+  width: 230px;
+  max-width: calc(100vw - 125px);
+}
 </style>

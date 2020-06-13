@@ -1,32 +1,99 @@
 <template>
-  <div class="container md-elevation-8">
-    <div class="label md-elevation-8">
-        Commands
-    </div>
+  <div class="container">
     <div class="content">
-        Hello
+      <div class="button">
+        <md-button class="md-icon-button md-raised md-primary">
+          <h1>&lt;</h1>
+        </md-button>
+      </div>
+      <div class="button">
+        <md-button class="md-icon-button md-raised md-primary">
+          <h1>&gt;</h1>
+        </md-button>
+      </div>
+      <div class="button">
+        <md-button class="md-icon-button md-raised md-primary">
+          <h1>&plus;</h1>
+        </md-button>
+      </div>
+      <div class="button">
+        <md-button class="md-icon-button md-raised md-primary">
+          <h1>&minus;</h1>
+        </md-button>
+      </div>
+      <div class="button">
+        <md-button class="md-icon-button md-raised md-primary">
+          <h1>.</h1>
+        </md-button>
+      </div>
+      <div class="button">
+        <md-button class="md-icon-button md-raised md-primary">
+          <h1>,</h1>
+        </md-button>
+      </div>
+      <div class="button">
+        <md-button class="md-icon-button md-raised md-primary">
+          <h1>[</h1>
+        </md-button>
+      </div>
+      <div class="button">
+        <md-button class="md-icon-button md-raised md-primary">
+          <h1>]</h1>
+        </md-button>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
-  export default {
-    name: 'Commands',
-    data: function() {
-        return {
-            text: ''
-        }
-    }
-  }
+export default {
+  name: "Commands",
+  data: function() {
+    return {
+      text: "",
+    };
+  },
+};
 </script>
 
 <style lang="scss" scoped>
+@import "~vue-material/dist/theme/engine";
 
-  .container {
-    background-color: orange;
-  }
+@include md-register-theme(
+  "default",
+  (
+    primary: #ffffff,
+  )
+);
 
-  .label {
-      background-color: orange;
-  }
+@import "~vue-material/dist/components/MdButton/theme";
+
+.container {
+  background-image: linear-gradient(
+    to left,
+    #ffa207,
+    #ff901b,
+    #ff7f2a,
+    #ff6d36,
+    #ff5b42,
+    #ff4d4e,
+    #ff3e5a,
+    #ff2e67,
+    #ff1f78,
+    #ff0e8a,
+    #ff039d,
+    #ff0bb2
+  );
+  overflow: auto;
+}
+
+.content {
+  margin: 0 auto;
+  text-align: center;
+}
+
+.button {
+  margin: 10px;
+  display: inline-block;
+}
 </style>

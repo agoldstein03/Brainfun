@@ -1,56 +1,52 @@
 <template>
   <div id="app">
     <div id="top">
-      <TopBar/>
+      <TopBar />
     </div>
-    <div class="md-layout">
-      <div class="md-layout-item md-size-35">
-        <Directions/>
+    <div id="middle" class="md-layout">
+      <div class="md-layout-item">
+        <Directions />
       </div>
-      <div class="md-layout-item md-size-65">
-        <div class="md-layout">
-          <div class="md-layout-item md-size-50">
-            <Console/>
+      <div class="md-layout-item" style="border-left:3px solid black">
+        <div id="middle" class="md-layout">
+          <div id="console" class="md-layout-item md-size-100" style="height:85%">
+            <Console />
+            <Play id="play"/>
+            <Submit id="submit"/>
           </div>
-          <div class="md-layout-item md-size-50">
-            <Notepad/>
-          </div>
-          <div class="md-layout-item md-size-50">
-            <Commands/>
-          </div>
-          <div class="md-layout-item md-size-50">
-            <Execute/>
+          <div id="commands" class="md-layout-item md-size-100" style="height:15%">
+            <Commands />
           </div>
         </div>
       </div>
     </div>
     <div id="bottom">
-      <TapeVisualizer/>
+      <TapeVisualizer />
     </div>
   </div>
 </template>
 
 <script>
-import TopBar from './components/TopBar.vue'
-import Directions from './components/Directions.vue'
-import Console from './components/Console.vue'
-import Notepad from './components/Notepad.vue'
-import TapeVisualizer from './components/TapeVisualizer.vue'
-import Commands from './components/Commands.vue'
-import Execute from './components/Execute.vue'
+import TopBar from "./components/TopBar.vue";
+import Directions from "./components/Directions.vue";
+import Console from "./components/Console.vue";
+import TapeVisualizer from "./components/TapeVisualizer.vue";
+import Commands from "./components/Commands.vue";
+import Play from "./components/Play.vue";
+import Submit from "./components/Submit.vue";
 
 export default {
-  name: 'App',
+  name: "App",
   components: {
     TopBar,
     Directions,
     Console,
-    Notepad,
     TapeVisualizer,
     Commands,
-    Execute
-  }
-}
+    Play,
+    Submit
+  },
+};
 </script>
 
 <style>
@@ -58,11 +54,10 @@ export default {
   font-family: Roboto, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
   color: #2c3e50;
 }
 
-.md-layout {
+#middle {
   height: 70vh;
 }
 
@@ -74,29 +69,36 @@ export default {
   height: 20vh;
 }
 
-
 .container {
   position: relative;
   padding: 8px;
-  justify-content: center;
-  align-items: center;
-  background-color: green;
-  margin-bottom: 0px;
   height: 100%;
 }
 
-.label {
-    position: absolute;
-    left: 0px;
-    top: 0px;
-    background-color: green;
-    color: white;
-    padding: 8px;
+.md-layout-item {
+  height: 100%;
 }
 
-.content {
-    height: 100%;
-    width: 100%;
-    background-color: white;
+#console {
+  position: relative;
+  z-index: 1;
 }
+
+#commands {
+  position: relative;
+  z-index: 0;
+}
+
+#play {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+
+#submit {
+  position: absolute;
+  top: 60px;
+  right: 10px;
+}
+
 </style>
