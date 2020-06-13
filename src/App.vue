@@ -12,6 +12,7 @@
           <div id="console" class="md-layout-item md-size-100" style="height:85%">
             <Console />
             <Play id="play"/>
+            <Submit id="submit"/>
           </div>
           <div id="commands" class="md-layout-item md-size-100" style="height:15%">
             <Commands />
@@ -32,6 +33,7 @@ import Console from "./components/Console.vue";
 import TapeVisualizer from "./components/TapeVisualizer.vue";
 import Commands from "./components/Commands.vue";
 import Play from "./components/Play.vue";
+import Submit from "./components/Submit.vue";
 
 export default {
   name: "App",
@@ -41,7 +43,8 @@ export default {
     Console,
     TapeVisualizer,
     Commands,
-    Play
+    Play,
+    Submit
   },
 };
 </script>
@@ -89,6 +92,12 @@ export default {
 #play {
   position: absolute;
   top: 10px;
+  right: 10px;
+}
+
+#submit {
+  position: absolute;
+  top: 60px;
   right: 10px;
 }
 

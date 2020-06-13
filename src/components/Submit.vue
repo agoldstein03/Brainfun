@@ -1,14 +1,14 @@
 <template>
   <div>
     <md-button class="md-icon-button md-raised md-primary">
-      <md-icon>play_arrow</md-icon>
+      <md-icon>send</md-icon>
     </md-button>
   </div>
 </template>
 
 <script>
 export default {
-  name: "Play",
+  name: "Submit",
   data: function() {},
 };
 </script>

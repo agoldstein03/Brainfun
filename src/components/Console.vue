@@ -1,6 +1,6 @@
 <template>
   <div class="container md-elevation-8">
-    ++++++++++++
+    ++++++++++++++
   </div>
 </template>
 
@@ -17,6 +17,8 @@ export default {
 
 <style lang="scss" scoped>
 .container {
+  width: 50vw;
+  overflow: auto;
   background-color: rgb(69, 69, 69);
   font-size: 32px;
   color: white;
