@@ -3,14 +3,13 @@
     <div class="content">
       <transition-group name="cells" tag="div" :class="{cells: true, 'up': up, 'down': !up}">
         <span class="md-display-3 cell" v-for="{value, originalIndex} in displayGrid" :key="originalIndex">
-          <span v-if="originalIndex != pointer" class="num-item" :key="value+'-num-'+originalIndex">{{ value }}</span>
-          <transition v-else name="num">
-            <span :style="directionStyle" :class="{'num-item':true}" :key="value+'-num-'+originalIndex">{{ value }}</span>
+          <transition name="num">
+            <span :style="originalIndex == pointer ? directionStyle : ''" :class="{'num-item':true, 'up': originalIndex == pointer && up, 'down': originalIndex == pointer && !up}" :key="up[originalIndex]+'val'+value+'-num-'+originalIndex">{{ value }}</span>
           </transition>
           <div class="md-subheading sub">{{ originalIndex }}</div>
         </span>
       </transition-group>
-      <span class="md-display-1">^</span>
+      <div class="md-display-1 arrow">^</div>
     </div>
   </div>
 </template>
@@ -38,7 +37,7 @@ export default {
       grid: [1,2,3,4,5,6,7],
       //displayGrid: [],
       pointer: 0,
-      up: true,
+      up: false,
       directionStyle: {
         "--direction": 1
       }
@@ -48,13 +47,17 @@ export default {
     //updateDisplayGrid,
     add() {
       this.up = false;
-      this.$set(this.directionStyle, "--direction", 1)
-      this.$set(this.grid, this.pointer, this.grid[this.pointer] + 1);
+      //this.$set(this.up, this.pointer, 1);
+      this.$nextTick(function () {
+        this.$set(this.grid, this.pointer, this.grid[this.pointer] + 1); 
+      })
     },
     subtract() {
       this.up = true;
-      this.$set(this.directionStyle, "--direction", -1)
-      this.$set(this.grid, this.pointer, this.grid[this.pointer] - 1);
+      //this.$set(this.up, this.pointer, -1);
+      this.$nextTick(function () {
+        this.$set(this.grid, this.pointer, this.grid[this.pointer] - 1);
+      })
     },
     right() {
       this.pointer++;
@@ -88,12 +91,20 @@ export default {
 
 <style lang="scss" scoped>
 
+.arrow {
+  width: 100%;
+  background: white;
+  text-align: center;
+  z-index: 1;
+}
+
 .sub {
   position: relative;
 }
 
 .content {
   --transformTime: 1s;
+  overflow-x: hidden;
 }
 
 .num-item {
@@ -102,7 +113,7 @@ export default {
 }
 
 .num-enter-active, .num-leave-active {
-  transition: transform var(--transformTime) .5s, opacity calc(.75*var(--transformTime)) .5s,
+  transition: transform var(--transformTime), opacity calc(.75*var(--transformTime));
 }
 
 .num-enter {
@@ -120,28 +131,28 @@ export default {
 .down {
   --direction: -1;
 }
-
-.num-enter {
-  transform: translateY(calc(var(--direction)*1.25em));
-}
 /*
+.num-enter {
+  transform: translateY(calc(var(--direction)*-1.25em));
+}
+*/
 .num-enter.up {
-  transform: translateY(1.25em);
+  transform: translateY(-1.25em);
 }
 
 .num-enter.down {
-  transform: translateY(-1.25em);
+  transform: translateY(1.25em);
 }
-*/
+
 .num-leave-active {
   position: absolute;
-  transform: translateY(calc(var(--direction)*-1.25em));
-  /*&.up {
-    transform: translateY(-1.25em);
+  //transform: translateY(calc(var(--direction)*1.25em));
+  &.up {
+    transform: translateY(1.25em);
   }
   &.down {
-    transform: translateY(1.25em);
-  }*/
+    transform: translateY(-1.25em);
+  }
 }
 
 /*
@@ -169,7 +180,7 @@ export default {
 }*/
 
 .cells {
-  overflow-x: hidden;
+  overflow: hidden;
   white-space: nowrap;
   }
 
@@ -189,6 +200,7 @@ export default {
   }
 
 .cell {
+  overflow: hidden;
   width: 3.5ch;
   border-left: 3px darkgrey solid;
   display: inline-block;
