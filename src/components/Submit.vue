@@ -1,7 +1,7 @@
 <template>
   <div>
     <md-button class="md-icon-button md-raised md-primary">
-      <md-icon>send</md-icon>
+      <md-icon>done</md-icon>
     </md-button>
   </div>
 </template>
