@@ -57,6 +57,8 @@ import Output from "./components/Output.vue";
 /* globals firebase */
 
 let db = firebase.firestore();
+let auth = firebase.auth();
+
 
 export default {
   name: "App",
@@ -72,7 +74,9 @@ export default {
       correct: true,
       msg: "You failed!",
       active: false,
-      char: ""
+      char: "",
+      uid: "",
+      current: {lesson: 1, exercise: 1}
       //realLessonData: this.lessonData.doc(this.lesson+"."+this.exercise)
     };
   },
@@ -90,29 +94,55 @@ export default {
     lessons: db.collection('lessons'),
   },
   created() {
-    this.$bind('lessonData', db.collection('lessons').doc(this.fullLesson))
+
+
+auth.onAuthStateChanged((function(user) {
+  if (user) {
+    this.uid = user.uid.uid;
+    this.$bind('current', db.collection('current').doc(this.uid ? this.uid : "anon"));
+    this.lesson = (this.current ?  this.current : {}).lesson ? (this.current ?  this.current : {}).lesson : 1;
+    this.exercise = (this.current ?  this.current : {}).exercise ? (this.current ?  this.current : {}).exercise : 1;
+  } else {
+    auth.signInAnonymously();
+  }
+}).bind(this));
+
+    this.$bind('lessonData', db.collection('lessons').doc(this.fullLesson));
+    this.$bind('current', db.collection('current').doc(this.uid ? this.uid : "anon"));
+    this.lesson = (this.current ?  this.current : {}).lesson ? (this.current ?  this.current : {}).lesson : 1;
+    this.exercise = (this.current ?  this.current : {}).exercise ? (this.current ?  this.current : {}).exercise : 1;
+
+    this.$firestoreRefs.current.get().then(a=>a.data()).then(a=>{this.lesson=a.lesson;this.exercise=a.exercise});//{lesson: num, exercise: this.exercise}
+
+    
+        this.fullLesson = this.lesson+'.'+this.exercise;
+
+
+
   },
   watch: {
     fullLesson: {
       // call it upon creation too
       immediate: true,
       handler(num) {
-        console.log(db);
+        //console.log(db);
         this.$bind('lessonData', db.collection('lessons').doc(num))
       },
     },
     lesson: {
       // call it upon creation too
-      immediate: true,
       handler(num) {
         this.fullLesson = num+'.'+this.exercise;
+    this.$bind('current', db.collection('current').doc(this.uid ? this.uid : "anon"));
+        this.$firestoreRefs.current.set({lesson: num, exercise: this.exercise});
       },
     },
     exercise: {
       // call it upon creation too
-      immediate: true,
       handler(num) {
         this.fullLesson = this.lesson+'.'+num;
+    this.$bind('current', db.collection('current').doc(this.uid ? this.uid : "anon"));
+        this.$firestoreRefs.current.update({lesson: this.lesson, exercise: num});
       },
     },
   },
