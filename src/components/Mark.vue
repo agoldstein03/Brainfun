@@ -1,6 +1,6 @@
 <template>
-    <div :style="this.marginProperties" :class="[ID + '-backdrop']">
-      <div v-html="renderMarks(boundaries, value)" :class="[ID + '-highlights', ID + '-content']">
+    <div ref="backdrop" :style="this.marginProperties" :class="[ID + '-backdrop']">
+      <div :key="value" v-html="renderMarks(boundaries, value)" :class="[ID + '-highlights', ID + '-content']">
         
       </div>
     </div>
@@ -39,7 +39,7 @@ export default {
         this.boundaries = this.getBoundaries(unstaggeredRanges);
     },
     handleScroll: function() {
-      document.getElementsByClassName(this.ID + '-backdrop')[0].scrollTop = document.querySelector('#console .' + this.el).scrollTop;
+      this.$refs.backdrop.scrollTop = document.querySelector('#console .' + this.el).scrollTop;
 
       // Chrome and Safari won't break long strings of spaces, which can cause
       // horizontal scrolling, this compensates by shifting highlights by the
