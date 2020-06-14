@@ -391,44 +391,35 @@ let HighlightWithinTextarea = function(el, config) {
 }
 
 .one {
-  color: #48ffbc;
-}
-
-.two {
-  color: #2eb5e7;
-}
-
-.three {
   color: #ff4b42;
 }
 
-.four {
+.two {
   color: #ff9630;
 }
 
+.three {
+  color: #2eb5e7;
+}
+
+.four {
+  color: #48ffbc;
+}
+
 .five {
-  color: #cee50e;
-}
-
-.six {
-  color: #009337;
-}
-
-.seven {
   color: #e02fcd;
 }
 
-.eight {
+.six {
   color: #8b60ed;
 }
 
+.seven {
+  color: #cee50e;
+}
 
-
-
-
-
-
-
-
+.eight {
+  color: #009337;
+}
 
 </style>
