@@ -34,7 +34,7 @@ export default {
   name: "TapeVisualizer",
   data: function() {
     return {
-      grid: [1,2,3,4,5,6,7],
+      grid: [],
       //displayGrid: [],
       pointer: 0,
       up: false,
@@ -49,14 +49,14 @@ export default {
       this.up = false;
       //this.$set(this.up, this.pointer, 1);
       this.$nextTick(function () {
-        this.$set(this.grid, this.pointer, this.grid[this.pointer] + 1); 
+        this.$set(this.grid, this.pointer, (((this.grid[this.pointer] ? this.grid[this.pointer] : 0) + 1 + 384) % 256) - 128); 
       })
     },
     subtract() {
       this.up = true;
       //this.$set(this.up, this.pointer, -1);
       this.$nextTick(function () {
-        this.$set(this.grid, this.pointer, this.grid[this.pointer] - 1);
+        this.$set(this.grid, this.pointer, (((this.grid[this.pointer] ? this.grid[this.pointer] : 0) - 1 + 384) % 256) - 128);
       })
     },
     right() {
@@ -122,35 +122,36 @@ export default {
 .num-leave-active {
   opacity: 0;
 }
-
+/*
 .up {
-  --direction: 1;
+  --direction: -1;
 }
 
 .down {
-  --direction: -1;
+  --direction: 1;
 }
+*/
 /*
 .num-enter {
   transform: translateY(calc(var(--direction)*-1.25em));
 }
 */
 .num-enter.up {
-  transform: translateY(-1.25em);
+  transform: translateY(1.25em);
 }
 
 .num-enter.down {
-  transform: translateY(1.25em);
+  transform: translateY(-1.25em);
 }
 
 .num-leave-active {
   position: absolute;
   //transform: translateY(calc(var(--direction)*1.25em));
   &.up {
-    transform: translateY(1.25em);
+    transform: translateY(-1.25em);
   }
   &.down {
-    transform: translateY(-1.25em);
+    transform: translateY(1.25em);
   }
 }
 

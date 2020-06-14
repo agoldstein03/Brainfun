@@ -12,11 +12,8 @@
             id="lessons"
             @md-selected="changeExercise"
           >
-            <md-optgroup label="Lesson 1: Welcome to BrainFUN!"> </md-optgroup>
-
-            <md-optgroup label="Lesson 2: The + Operator">
-              <md-option value="l2ex1">Exercise 1</md-option>
-              <md-option value="l2ex2">Exercise 2</md-option>
+            <md-optgroup v-for="(lessonsInfo, lessonNum) in formattedLessons" :key="lessonNum" :label="'Lesson '+lessonNum+': '+lessonsInfo[0].lessonTitle"> 
+              <md-option v-for="lessonInfo in lessonsInfo" :key="lessonInfo.exercise" :value="lessonNum+'.'+lessonInfo.exercise">Exercise {{ lessonInfo.exercise }}</md-option>
             </md-optgroup>
           </md-select>
         </md-field>
@@ -31,17 +28,44 @@
 </template>
 
 <script>
+
+/* global firebase */
+
+let db = firebase.firestore();
+
 export default {
   name: "TopBar",
+  prop: [
+    "lesson"
+  ],
   data: () => ({
     showNavigation: false,
-    lesson: "l2ex1",
+    lessonNum: 2,
+    exercise: 1,
+    allLessons: [],
+    formattedLessons: {}
   }),
   mounted() {
-    const lesson = this.lesson.charAt(1);
+    /*const lesson = this.lesson.charAt(1);
     const ex = this.lesson.charAt(4);
     this.$el.querySelector("#label").innerHTML =
-      "Lesson " + lesson + " - Ex. " + ex
+      "Lesson " + lesson + " - Ex. " + ex*/
+      let [num1, num2] = this.prop.split('.');
+      this.lessonNum = parseInt(num1);
+      this.exercise = parseInt(num2);
+  },
+  firestore: {
+    allLessons: db.collection('lessons')
+  },
+  watch: {
+    allLessons(data) {
+      this.formattedLessons = this.lessonsFormat(data);
+    },
+    lesson(data) {
+      let [num1, num2] = data.split('.');
+      this.lessonNum = parseInt(num1);
+      this.exercise = parseInt(num2);
+    }
   },
   methods: {
     changeExercise(exercise) {
@@ -53,6 +77,17 @@ export default {
     },
     showDialog() {
       this.$emit("login")
+    },
+    lessonsFormat(les) {
+    let obj = {};
+    for (let l of les) {
+      if (!obj[l.lesson]) {
+        obj[l.lesson] = [l];
+      } else {
+        obj[l.lesson].push(l)
+      }
+    }
+    return obj
     }
   },
 };

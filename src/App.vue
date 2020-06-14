@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <div id="top">
-      <TopBar v-on:change="changeExercise" v-on:login="login"/>
+      <TopBar :lesson="fullLesson" v-on:change="changeExercise" v-on:login="login"/>
     </div>
     <div id="middle" class="md-layout">
       <div class="md-layout-item">
@@ -53,18 +53,23 @@ export default {
   //},
   data() {
     return {
+      fullLesson: "2.1",
       lesson: 2,
       exercise: 1,
       lessons: null,
-      lessonData: null,
+      lessonData: {lessonTitle: ""},
       //realLessonData: this.lessonData.doc(this.lesson+"."+this.exercise)
     }
+  },
+  created() {
+    this.$bind('lessonData', db.collection('lessons').doc(this.lesson+"."+this.exercise))
   },
   watch: {
     lesson: {
       // call it upon creation too
       immediate: true,
       handler(num) {
+        console.log(db);
         this.$bind('lessonData', db.collection('lessons').doc(num+"."+this.exercise))
       },
     },

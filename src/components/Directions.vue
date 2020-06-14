@@ -2,7 +2,8 @@
   <div class="container">
     <md-tabs  class="md-transparent" md-alignment="fixed">
       <md-tab id="tab-task" md-label="TASK" exact>
-        <h1>{{ this.$parent.lesson }} - {{ lessonData.lessonTitle }}</h1>
+        <h1>{{ this.$parent.lesson }} - {{ lessonData ? lessonData.lessonTitle : '' }}</h1>
+        {{ lessonData ? lessonData.directions : '' }}
       </md-tab>
 
       <md-tab id="tab-references" md-label="REFERENCES">
