@@ -98,7 +98,7 @@ export default {
 
     },
     run() {
-
+      this.$emit('done');
     },
     stop() {
       this.shouldStop = true;
