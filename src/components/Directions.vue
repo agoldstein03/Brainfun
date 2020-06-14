@@ -43,7 +43,7 @@ export default {
   overflow: auto;
   height: 100%;
   box-shadow: 
-    inset 0px -9px 8px -10px black; 
+    inset 0px -9px 8px -10px black;
 }
 .content {
   padding-left: 10px;

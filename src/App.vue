@@ -1,28 +1,35 @@
 <template>
   <div id="app">
     <div id="top">
-      <TopBar v-on:change="changeExercise" v-on:login="login"/>
+      <TopBar v-on:change="changeExercise" v-on:login="login" />
     </div>
     <div id="middle" class="md-layout">
       <div class="md-layout-item">
-        <Directions :lessonData="lessonData" ref="directions"/>
+        <div id="right" class="md-layout">
+          <div class="md-layout-item">
+            <Directions :lessonData="lessonData" ref="directions" />
+          </div>
+          <div class="md-layout-item">
+            <Output />
+          </div>
+        </div>
       </div>
       <div class="md-layout-item" style="border-left:3px solid black">
         <div id="right" class="md-layout">
           <div id="console" class="md-layout-item">
-            <Console v-on:submit="submit" ref="console"/>
+            <Console v-on:submit="submit" ref="console" />
           </div>
           <div id="commands" class="md-layout-item">
-            <Commands v-on:command="runCommand"/>
+            <Commands v-on:command="runCommand" />
           </div>
         </div>
       </div>
     </div>
     <div id="bottom">
-      <TapeVisualizer id="tape" ref="tape"/>
+      <TapeVisualizer id="tape" ref="tape" />
     </div>
-    <Login ref="login"/>
-    <SubmitDialog :success="correct" :message="msg" ref="submit"/>
+    <Login ref="login" />
+    <SubmitDialog :success="correct" :message="msg" ref="submit" />
   </div>
 </template>
 
@@ -34,7 +41,7 @@ import TapeVisualizer from "./components/TapeVisualizer.vue";
 import Commands from "./components/Commands.vue";
 import Login from "./components/Login.vue";
 import SubmitDialog from "./components/SubmitDialog.vue";
-
+import Output from "./components/Output.vue";
 
 /* globals firebase */
 
@@ -60,7 +67,8 @@ export default {
     TapeVisualizer,
     Commands,
     Login,
-    SubmitDialog
+    SubmitDialog,
+    Output,
   },
   //firestore: {
   //  lessons: db.collection('lessons'),
@@ -70,45 +78,50 @@ export default {
       // call it upon creation too
       immediate: true,
       handler(num) {
-        this.$bind('lessonData', db.collection('lessons').doc(num+"."+this.exercise))
+        this.$bind(
+          "lessonData",
+          db.collection("lessons").doc(num + "." + this.exercise)
+        );
       },
     },
     exercise: {
       // call it upon creation too
       immediate: true,
       handler(num) {
-        this.$bind('lessonData', db.collection('lessons').doc(this.exercise+"."+num))
+        this.$bind(
+          "lessonData",
+          db.collection("lessons").doc(this.exercise + "." + num)
+        );
       },
     },
   },
   methods: {
     runCommand(command) {
-      this.$refs.console.addChar(command)
+      this.$refs.console.addChar(command);
       if (command === "<") {
-        this.$refs.tape.left()
+        this.$refs.tape.left();
       } else if (command === ">") {
-        this.$refs.tape.right()
+        this.$refs.tape.right();
       } else if (command === "+") {
-        this.$refs.tape.add()
+        this.$refs.tape.add();
       } else if (command === "-") {
-        this.$refs.tape.subtract()
+        this.$refs.tape.subtract();
       }
     },
     changeExercise(lesson, ex) {
-      this.$refs.directions.changeExercise(lesson, ex)
+      this.$refs.directions.changeExercise(lesson, ex);
     },
     login() {
-      this.$refs.login.login()
+      this.$refs.login.login();
     },
     submit() {
-      this.$refs.submit.showDialog()
-    }
-  }
+      this.$refs.submit.showDialog();
+    },
+  },
 };
 </script>
 
 <style lang="scss">
-
 body {
   height: 100%;
   min-height: 100%;
@@ -165,5 +178,4 @@ body {
 #commands {
   flex: 0 0;
 }
-
 </style>
