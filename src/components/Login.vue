@@ -6,24 +6,24 @@
       <div class="md-layout md-gutter">
         <div class="md-layout-item buttons">
           <div>
-            <md-button id="google" class="md-raised md-primary"><md-icon class="fa fa-google" />Sign in with Google</md-button>
+            <md-button @click="google" id="google" class="md-raised md-primary"><md-icon class="fa fa-google" />Sign in with Google</md-button>
           </div>
           <div>
-            <md-button id="github" class="md-raised md-primary"><md-icon class="fa fa-github" />Sign in with Github</md-button>
+            <md-button @click="github" id="github" class="md-raised md-primary"><md-icon class="fa fa-github" />Sign in with Github</md-button>
           </div>
         </div>
         <div class="md-layout-item form">
           <md-field>
             <label>Username</label>
-            <md-input></md-input>
+            <md-input v-model="username"></md-input>
           </md-field>
 
           <md-field>
             <label>Password</label>
-            <md-input type="password"></md-input>
+            <md-input v-model="password" type="password"></md-input>
           </md-field>
           <div>
-            <md-button class="login md-raised md-primary">Login</md-button>
+            <md-button @click="email" class="login md-raised md-primary">Login</md-button>
           </div>
         </div>
       </div>
@@ -32,14 +32,34 @@
 </template>
 
 <script>
+
+/* global firebase */
+
+let auth = firebase.auth();
+
   export default {
     name: 'Login',
     data: () => ({
-      showDialog: false
+      showDialog: false,
+      username: "",
+      password: ""
     }),
     methods: {
       login() {
         this.showDialog = true
+      },
+      github() {
+        let provider = new firebase.auth.GithubAuthProvider();
+        provider.setCustomParameters({
+          'allow_signup': 'true'
+        });
+        auth.signInWithRedirect(provider);
+      },
+      google() {
+        auth.signInWithPopup(new firebase.auth.GoogleAuthProvider()).then(()=> {this.showDialog = false})
+      },
+      email() {
+        auth.signInWithEmailAndPassword(this.username, this.password).then(()=> {this.showDialog = false})
       }
     }
   }
