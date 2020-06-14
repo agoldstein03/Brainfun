@@ -2,42 +2,42 @@
   <div class="container">
     <div class="content">
       <div class="button">
-        <md-button @click="pushCommand('<')" class="md-icon-button md-raised md-primary">
+        <md-button @click="pushCommand('<')" class="md-icon-button md-raised md-primary one">
           <h1>&lt;</h1>
         </md-button>
       </div>
       <div class="button">
-        <md-button @click="pushCommand('>')" class="md-icon-button md-raised md-primary">
+        <md-button @click="pushCommand('>')" class="md-icon-button md-raised md-primary two">
           <h1>&gt;</h1>
         </md-button>
       </div>
       <div class="button">
-        <md-button @click="pushCommand('+')" class="md-icon-button md-raised md-primary">
+        <md-button @click="pushCommand('+')" class="md-icon-button md-raised md-primary three">
           <h1>&plus;</h1>
         </md-button>
       </div>
       <div class="button">
-        <md-button @click="pushCommand('-')" class="md-icon-button md-raised md-primary">
+        <md-button @click="pushCommand('-')" class="md-icon-button md-raised md-primary four">
           <h1>&minus;</h1>
         </md-button>
       </div>
       <div class="button">
-        <md-button @click="pushCommand('.')" class="md-icon-button md-raised md-primary">
+        <md-button @click="pushCommand('.')" class="md-icon-button md-raised md-primary five">
           <h1>.</h1>
         </md-button>
       </div>
       <div class="button">
-        <md-button @click="pushCommand(',')" class="md-icon-button md-raised md-primary">
+        <md-button @click="pushCommand(',')" class="md-icon-button md-raised md-primary six">
           <h1>,</h1>
         </md-button>
       </div>
       <div class="button">
-        <md-button @click="pushCommand('[')" class="md-icon-button md-raised md-primary">
+        <md-button @click="pushCommand('[')" class="md-icon-button md-raised md-primary seven">
           <h1>[</h1>
         </md-button>
       </div>
       <div class="button">
-        <md-button @click="pushCommand(']')" class="md-icon-button md-raised md-primary">
+        <md-button @click="pushCommand(']')" class="md-icon-button md-raised md-primary eight">
           <h1>]</h1>
         </md-button>
       </div>
@@ -104,4 +104,40 @@ export default {
   margin: 10px;
   display: inline-block;
 }
+
+
+.one {
+  color: #00de8d !important;
+}
+
+.two {
+  color: #13b3ef !important;
+}
+
+.three {
+  color:  #ff4a41 !important;
+}
+
+.four {
+  color: #ff7e00 !important;
+}
+
+.five {
+  color: #b6cb00 !important;
+}
+
+.six {
+  color: #009337 !important;
+}
+
+.seven {
+  color: #e518cf !important;
+}
+
+.eight {
+  color: #7b4ce8 !important;
+}
+
+
+
 </style>

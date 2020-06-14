@@ -1,7 +1,8 @@
 <template>
   <div class="container">
-    <md-field id="editor">
-      <p id="formatted" class="code" spellcheck="false"></p>
+    <md-field id="editor" class=".hwt-container codeContainer">
+      <!-- <p id="formatted" class="code" spellcheck="false"></p> -->
+      <Mark v-bind:config="{highlight: [{highlight: '+', className: 'one'},{highlight: '-', className: 'two'},{highlight: '>', className: 'three'},{highlight: '<', className: 'four'},{highlight: '[', className: 'five'},{highlight: ']', className: 'six'},{highlight: '.', className: 'seven'},{highlight: ',', className: 'eight'}]}" el="md-textarea" v-bind:value="code"/>
       <md-textarea
         class="code"
         :key="key"
@@ -21,11 +22,15 @@
 import Play from "./Play.vue";
 import Submit from "./Submit.vue";
 
+//import HighlightWithinTextarea from "highlight-within-textarea-unjquery/highlight-within-textarea.js";
+import Mark from "./Mark";
+
 export default {
   name: "Console",
   components: {
     Play,
     Submit,
+    Mark
   },
   data: function() {
     return {
@@ -55,7 +60,7 @@ export default {
   },
   methods: {
     format: function() {
-      let formatted = ``;
+      /*let formatted = ``;
       for (const c of this.code) {
         const index = this.commands.indexOf(c)
         if (c !== -1) {
@@ -64,7 +69,7 @@ export default {
           formatted += c
         }
       }
-      this.$el.querySelector("#formatted").innerHTML = formatted;
+      this.$el.querySelector("#formatted").innerHTML = formatted;*/
     },
     addChar: function(char) {
       this.code = this.code.concat(char);
@@ -136,6 +141,7 @@ $buttonVerticalSpace: $consolePadding / 2;
   word-wrap: break-word;
 }
 
+
 .code {
   position: absolute;
   top: 0px;
@@ -151,6 +157,13 @@ $buttonVerticalSpace: $consolePadding / 2;
   height: 100% !important;
   max-height: 100% !important;
   width: 100%;
+}
+
+.codeContainer {
+  color: white;
+  letter-spacing: 0.01em;
+  line-height: 30px !important;
+  font-size: 24px !important;
 }
 
 .md-textarea {
