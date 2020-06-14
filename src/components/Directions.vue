@@ -3,15 +3,15 @@
     <md-tabs  class="md-transparent" md-alignment="fixed">
       <md-tab id="tab-task" md-label="TASK" exact>
         <h1>{{ this.$parent.lesson }} - {{ lessonData ? lessonData.lessonTitle : '' }}</h1>
-        {{ lessonData ? lessonData.directions : '' }}
+        <p v-bind:style="styleObject">{{ lessonData ? lessonData.directions : '' }}>{{ lessonData ? lessonData.directions : '' }}</p>
       </md-tab>
 
       <md-tab id="tab-references" md-label="REFERENCES">
-        <p>Unde provident nemo reiciendis officia, possimus repellendus. Facere dignissimos dicta quis rem. Aliquam aspernatur dolor atque nisi id deserunt laudantium quam repellat.</p>
+        <p v-bind:style="styleObject">Unde provident nemo reiciendis officia, possimus repellendus. Facere dignissimos dicta quis rem. Aliquam aspernatur dolor atque nisi id deserunt laudantium quam repellat.</p>
       </md-tab>
 
       <md-tab id="tab-hints" md-label="HINTS">
-        <p>Qui, voluptas repellat impedit ducimus earum at ad architecto consectetur perferendis aspernatur iste amet ex tempora animi, illum tenetur quae assumenda iusto.</p>
+        <p v-bind:style="styleObject">Qui, voluptas repellat impedit ducimus earum at ad architecto consectetur perferendis aspernatur iste amet ex tempora animi, illum tenetur quae assumenda iusto.</p>
       </md-tab>
     </md-tabs>
   </div>
@@ -26,6 +26,10 @@ export default {
   ],
   data: function() {
     return {
+      styleObject: {
+        lineHeight: "25px",
+        fontSize: "20px"
+      },
       lesson: this.$parent.lesson,
       exercise: this.$parent.exercise,
       //realLessonData: this.lessonData.doc(this.lesson+"."+this.exercise)
@@ -35,7 +39,7 @@ export default {
     // changeExercise(lesson, ex) {
 
     // }
-  }
+  },
 };
 </script>
 

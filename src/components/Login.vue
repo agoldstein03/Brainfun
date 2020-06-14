@@ -59,15 +59,15 @@
   margin-top: 25px;
 }
 .md-field {
-  width: 15vw;
+  width: 250px;
 }
 #google {
-  width: 15vw;
+  width: 250px;
   background-color: white;
   color: #DB4437;
 }
 #github {
-  width: 15vw;
+  width: 250px;
   background-color: #24292e;
 }
 .buttons {
