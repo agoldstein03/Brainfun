@@ -347,16 +347,19 @@ let HighlightWithinTextarea = function(el, config) {
 .hwt-backdrop {
 	position: absolute !important;
 	top: 0 !important;
-	right: -99px !important;
+	//right: -99px !important;
 	bottom: 0 !important;
 	left: 0 !important;
-	padding-right: 99px !important;
+	//padding-right: 99px !important;
+	right: -40px !important;
+	padding-right: 40px !important;
 	overflow-x: hidden !important;
 	overflow-y: auto !important;
 }
 
 .hwt-highlights {
-	width: auto !important;
+  //width: auto !important;
+  width: 100%;
 	height: auto !important;
 	border-color: transparent !important;
 	white-space: pre-wrap !important;
