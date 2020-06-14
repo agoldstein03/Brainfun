@@ -2,43 +2,43 @@
   <div class="container">
     <div class="content">
       <div class="button">
-        <md-button @click="pushCommand('<')" class="md-icon-button md-raised md-primary one">
-          <h1>&lt;</h1>
+        <md-button @click="pushCommand('<')" class="md-icon-button md-raised md-primary">
+          <h1 class="one">&lt;</h1>
         </md-button>
       </div>
       <div class="button">
-        <md-button @click="pushCommand('>')" class="md-icon-button md-raised md-primary two">
-          <h1>&gt;</h1>
+        <md-button @click="pushCommand('>')" class="md-icon-button md-raised md-primary">
+          <h1 class="two">&gt;</h1>
         </md-button>
       </div>
       <div class="button">
-        <md-button @click="pushCommand('+')" class="md-icon-button md-raised md-primary three">
-          <h1>&plus;</h1>
+        <md-button @click="pushCommand('+')" class="md-icon-button md-raised md-primary">
+          <h1 class="three">&plus;</h1>
         </md-button>
       </div>
       <div class="button">
-        <md-button @click="pushCommand('-')" class="md-icon-button md-raised md-primary four">
-          <h1>&minus;</h1>
+        <md-button @click="pushCommand('-')" class="md-icon-button md-raised md-primary">
+          <h1 class="four">&minus;</h1>
         </md-button>
       </div>
       <div class="button">
-        <md-button @click="pushCommand('.')" class="md-icon-button md-raised md-primary five">
-          <h1>.</h1>
+        <md-button @click="pushCommand('.')" class="md-icon-button md-raised md-primary">
+          <h1 class="five">.</h1>
         </md-button>
       </div>
       <div class="button">
-        <md-button @click="pushCommand(',')" class="md-icon-button md-raised md-primary six">
-          <h1>,</h1>
+        <md-button @click="pushCommand(',')" class="md-icon-button md-raised md-primary">
+          <h1 class="six">,</h1>
         </md-button>
       </div>
       <div class="button">
-        <md-button @click="pushCommand('[')" class="md-icon-button md-raised md-primary seven">
-          <h1>[</h1>
+        <md-button @click="pushCommand('[')" class="md-icon-button md-raised md-primary">
+          <h1 class="seven">[</h1>
         </md-button>
       </div>
       <div class="button">
-        <md-button @click="pushCommand(']')" class="md-icon-button md-raised md-primary eight">
-          <h1>]</h1>
+        <md-button @click="pushCommand(']')" class="md-icon-button md-raised md-primary">
+          <h1 class="eight">]</h1>
         </md-button>
       </div>
     </div>
