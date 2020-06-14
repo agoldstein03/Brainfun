@@ -24,14 +24,14 @@ export default {
   data: function() {
     return {
       show: false,
+      correct: true,
+      message: ""
     };
   },
-  props: {
-      correct: Boolean,
-      message: String
-  },
   methods: {
-    showDialog() {
+    showDialog(correct, message) {
+      this.correct = correct
+      this.message = message
       this.show = true
     },
     nextLesson() {

@@ -152,7 +152,7 @@ export default {
       const response = this.$refs.tape.submit();
       this.correct = response.correct;
       this.msg = response.reason;
-      this.$refs.submit.showDialog();
+      this.$refs.submit.showDialog(this.correct, this.msg);
     },
     nextLesson() {
     },
