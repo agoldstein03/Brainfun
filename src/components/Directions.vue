@@ -24,6 +24,11 @@ export default {
       text: "",
     };
   },
+  methods: {
+    changeExercise(lesson, ex) {
+      
+    }
+  }
 };
 </script>
 

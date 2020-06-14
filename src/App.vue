@@ -1,11 +1,11 @@
 <template>
   <div id="app">
     <div id="top">
-      <TopBar />
+      <TopBar v-on:change="changeExercise"/>
     </div>
     <div id="middle" class="md-layout">
       <div class="md-layout-item">
-        <Directions />
+        <Directions ref="directions"/>
       </div>
       <div class="md-layout-item" style="border-left:3px solid black">
         <div id="right" class="md-layout">
@@ -52,6 +52,9 @@ export default {
       } else if (command === "-") {
         this.$refs.tape.subtract()
       }
+    },
+    changeExercise(lesson, ex) {
+      this.$refs.directions.changeExercise(lesson, ex)
     }
   }
 };

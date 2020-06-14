@@ -60,6 +60,7 @@ export default {
       const ex = this.lesson.charAt(4);
       this.$el.querySelector("#label").innerHTML =
         "Lesson " + lesson + " - Ex. " + ex
+      this.$emit("change", lesson, ex)
     },
     showMenu() {
     }
