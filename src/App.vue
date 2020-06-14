@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <div id="top">
-      <TopBar v-on:change="changeExercise"/>
+      <TopBar v-on:change="changeExercise" v-on:login="login"/>
     </div>
     <div id="middle" class="md-layout">
       <div class="md-layout-item">
@@ -21,6 +21,7 @@
     <div id="bottom">
       <TapeVisualizer id="tape" ref="tape"/>
     </div>
+    <Login ref="login"/>
   </div>
 </template>
 
@@ -30,6 +31,7 @@ import Directions from "./components/Directions.vue";
 import Console from "./components/Console.vue";
 import TapeVisualizer from "./components/TapeVisualizer.vue";
 import Commands from "./components/Commands.vue";
+import Login from "./components/Login.vue";
 
 
 /* globals firebase */
@@ -43,7 +45,8 @@ export default {
     Directions,
     Console,
     TapeVisualizer,
-    Commands
+    Commands,
+    Login
   },
   //firestore: {
   //  lessons: db.collection('lessons'),
@@ -89,6 +92,9 @@ export default {
     changeExercise(lesson, ex) {
       this.$refs.directions.changeExercise(lesson, ex)
     },
+    login() {
+      this.$refs.login.login()
+    }
   }
 };
 </script>
@@ -98,6 +104,7 @@ export default {
 body {
   height: 100%;
   min-height: 100%;
+  overflow: hidden;
 }
 
 #app {

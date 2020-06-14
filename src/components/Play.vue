@@ -1,7 +1,7 @@
 <template>
   <div>
     <md-button class="md-fab md-primary">
-      <md-icon>play_arrow</md-icon>
+      <md-icon class="md-size-2x">play_arrow</md-icon>
     </md-button>
   </div>
 </template>
@@ -22,7 +22,7 @@ export default {
 }
 
 .md-icon {
-  color: #FF0BB2 !important;
+  color: #ff8327 !important;
 }
 
 </style>

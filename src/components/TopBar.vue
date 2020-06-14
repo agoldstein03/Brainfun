@@ -1,9 +1,6 @@
 <template>
   <div class="topbar">
     <md-toolbar class="md-primary">
-      <md-button class="md-icon-button" @click="showNavigation = true">
-        <md-icon>menu</md-icon>
-      </md-button>
       <img id="logo" src="../assets/brainfun.png" />
       <span class="lesson visible"><b id="label">Lesson 2 - Ex. 2</b><md-icon class="md-size-2x">expand_more</md-icon></span>
       <span class="lesson hidden">
@@ -14,7 +11,6 @@
             name="lessons"
             id="lessons"
             @md-selected="changeExercise"
-            @md-opened="showMenu"
           >
             <md-optgroup label="Lesson 1: Welcome to BrainFUN!"> </md-optgroup>
 
@@ -25,19 +21,12 @@
           </md-select>
         </md-field>
       </span>
+      <div class="md-toolbar-section-end">
+        <md-button class="md-icon-button" @click="showDialog">
+          <md-icon class="login md-size-2x">login</md-icon>
+        </md-button>
+      </div>
     </md-toolbar>
-
-    <md-drawer :md-active.sync="showNavigation">
-      <md-toolbar md-elevation="0">
-        <span class="md-title">Menu</span>
-      </md-toolbar>
-
-      <md-list>
-        <md-list-item>
-          <span class="md-list-item-text">Lessons</span>
-        </md-list-item>
-      </md-list>
-    </md-drawer>
   </div>
 </template>
 
@@ -62,7 +51,8 @@ export default {
         "Lesson " + lesson + " - Ex. " + ex
       this.$emit("change", lesson, ex)
     },
-    showMenu() {
+    showDialog() {
+      this.$emit("login")
     }
   },
 };
@@ -111,6 +101,10 @@ export default {
 
 .hidden {
   opacity: 0;
+}
+
+.login {
+  margin-right: 20px;
 }
 
 .lesson {
