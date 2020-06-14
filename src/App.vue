@@ -33,6 +33,14 @@
     </div>
     <Login ref="login" />
     <SubmitDialog v-on:nextLesson="nextLesson" :success="correct" :message="msg" ref="submit" />
+    <md-dialog-prompt
+    v-model="char"
+      :md-active.sync="active"
+      md-title="Input a character"
+      md-input-maxlength="1"
+      md-confirm-text="Done"
+      @md-confirm="callRightValue"
+      @md-cancel="callRightValue('')" />
   </div>
 </template>
 
@@ -62,6 +70,8 @@ export default {
       lessonData: {lessonTitle: ""},
       correct: true,
       msg: "You failed!",
+      active: true,
+      char: ""
       //realLessonData: this.lessonData.doc(this.lesson+"."+this.exercise)
     };
   },
@@ -141,6 +151,12 @@ export default {
     },
     nextLesson() {
       
+    },
+    callRightValue(value) {
+      this.$refs.tape.rightValue(value)
+    },
+    getInput() {
+      this.active = true;
     }
   },
 };
