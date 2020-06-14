@@ -2,13 +2,13 @@
   <div id="app">
     <div id="top">
 
-      <TopBar :lesson="fullLesson" v-on:change="changeExercise" v-on:login="login" />
+      <TopBar :lesson="lesson" :exercise="exercise" v-on:change="changeExercise" v-on:login="login" />
     </div>
-    <div id="middle" class="md-layout">
+    <!-- <div id="middle" class="md-layout"> -->
       <div class="md-layout-item">
         <div id="right" class="md-layout">
           <div class="md-layout-item">
-            <Directions :lesson="lesson" :exercise="exercise" :lessonData="lessonData" ref="directions" />
+            <Directions :lesson="lesson" :exercise="exercise" :lessonData="lessonData ? lessonData : {'hints': []}" ref="directions" />
           </div>
           <div id="console" class="md-layout-item">
             <Console v-on:play="play" v-on:stop="forceStop" v-on:submit="submit" ref="console" />
@@ -16,20 +16,20 @@
         </div>
       </div>
 
-      <div class="md-layout-item">
+      <div class="shrink md-layout-item">
         <div id="right" class="md-layout">
           <div class="md-layout-item">
-            <Output />
+            <Output :output="output" />
           </div>
           <div id="commands" class="md-layout-item">
             <Commands v-on:command="runCommand" />
           </div>
         </div>
       </div>
-    </div>
+    <!-- </div> -->
 
     <div id="bottom">
-      <TapeVisualizer :checker="lessonData ? lessonData.checker : ''" :code="code" v-on:done="stop" :output.sync="output" id="tape" ref="tape" />
+      <TapeVisualizer :checker="lessonData ? lessonData.checker : ''" :code="code" v-on:done="stop" v-on:changeOutput="changeOutput" v-on:reset="reset" :output.sync="output" id="tape" ref="tape" />
     </div>
     <Login ref="login" />
     <SubmitDialog v-on:nextLesson="nextLesson" :success="correct" :message="msg" ref="submit" />
@@ -86,9 +86,9 @@ export default {
     SubmitDialog,
     Output,
   },
-  //firestore: {
-  //  lessons: db.collection('lessons'),
-  //},
+  firestore: {
+    lessons: db.collection('lessons'),
+  },
   created() {
     this.$bind('lessonData', db.collection('lessons').doc(this.fullLesson))
   },
@@ -117,6 +117,12 @@ export default {
     },
   },
   methods: {
+    reset() {
+      this.output = "";
+    },
+    changeOutput(char) {
+      this.output += char;
+    },
     runCommand(command) {
       this.$refs.console.addChar(command);
       if (command === "<") {
@@ -134,7 +140,8 @@ export default {
       }
     },
     changeExercise(lesson, ex) {
-      this.$refs.directions.changeExercise(lesson, ex);
+      this.lesson = lesson;
+      this.exercise = ex;
     },
     login() {
       this.$refs.login.login();
@@ -155,6 +162,14 @@ export default {
       this.$refs.submit.showDialog(this.correct, this.msg);
     },
     nextLesson() {
+      if (this.lessons.some(les => les.lesson == this.lesson && les.exercise == (this.exercise + 1))) {
+        this.exercise++;
+      } else if (this.lessons.some(les => les.lesson == (this.lesson + 1) && les.exercise == 1)) {
+        this.lesson++;
+        this.exercise = 1;
+      } else {
+        alert("Thank you for trying our demo! We hope to add more lessons soon; stay tuned!");
+      }
     },
     callRightValue(value) {
       this.$refs.tape.rightValue(value)
@@ -167,6 +182,11 @@ export default {
 </script>
 
 <style lang="scss">
+
+.shrink {
+  flex: 0 0 !important;
+}
+
 body {
   height: 100%;
   min-height: 100%;
@@ -185,11 +205,10 @@ body {
 
 #right {
   height: 100%;
-  display: flex;
   flex-direction: column;
 
-    display: grid;
-    grid-template-columns: 1fr 1fr;
+  display: grid;
+  grid-template-columns: 50% 50%;
 
 }
 

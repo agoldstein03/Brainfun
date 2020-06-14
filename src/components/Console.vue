@@ -97,12 +97,16 @@ $buttonVerticalSpace: $consolePadding / 2;
   margin-left: $buttonsLeftSpace;
 }
 
+#console .md-field:before, #console .md-field:before {
+  display: none;
+}
+
 .container {
   //width: 50vw;
   //overflow: auto;
   display: flex;
   position: relative;
-  background-color: rgb(69, 69, 69);
+  background-color: #262626;//rgb(69, 69, 69);
   //min-height: 112px;
   padding: $consolePadding;
   height: 100%;
@@ -168,10 +172,10 @@ $buttonVerticalSpace: $consolePadding / 2;
 }
 
 .md-field.md-theme-default:before {
-  background-color: rgb(69, 69, 69) !important;
+  background-color: #262626 /*rgb(69, 69, 69)*/ !important;
 }
 
 .md-field.md-theme-default:after {
-  background-color: rgb(69, 69, 69) !important;
+  background-color: #262626 /*rgb(69, 69, 69)*/ !important;
 }
 </style>

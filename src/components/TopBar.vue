@@ -2,13 +2,14 @@
   <div class="topbar">
     <md-toolbar class="md-primary">
       <img id="logo" src="../assets/brainfun.png" />
-      <span class="lesson visible"><b id="label">Lesson {{ lessonNum }} - Ex. {{ exercise }}</b><md-icon class="md-size-2x">expand_more</md-icon></span>
+      <span class="lesson visible"><b id="label">Lesson {{ lesson }} - Ex. {{ exercise }}</b><md-icon class="md-size-2x">expand_more</md-icon></span>
       <span class="lesson hidden">
         <md-field class="md-primary">
           <label for="lessons">Lessons</label>
           <md-select
             name="lessons"
             id="lessons"
+            v-model="lessonId"
             @md-selected="changeExercise"
           >
             <md-optgroup v-for="(lessonsInfo, theLessonNum) in formattedLessons" :key="theLessonNum" :label="'Lesson '+theLessonNum+': '+lessonsInfo[0].lessonTitle"> 
@@ -34,24 +35,22 @@ let db = firebase.firestore();
 
 export default {
   name: "TopBar",
-  prop: [
-    "lesson"
+  props: [
+    "lesson",
+    "exercise"
   ],
   data: () => ({
     showNavigation: false,
-    lessonNum: 2,
-    exercise: 1,
     allLessons: [],
-    formattedLessons: {}
+    formattedLessons: {},
+    lessonId: ""
   }),
   mounted() {
+    this.lessonId = this.lesson+'.'+this.exercise;
     /*const lesson = this.lesson.charAt(1);
     const ex = this.lesson.charAt(4);
     this.$el.querySelector("#label").innerHTML =
       "Lesson " + lesson + " - Ex. " + ex*/
-      let [num1, num2] = this.lesson.split('.');
-      this.lessonNum = parseInt(num1);
-      this.exercise = parseInt(num2);
   },
   firestore: {
     allLessons: db.collection('lessons')
@@ -61,32 +60,30 @@ export default {
       this.formattedLessons = this.lessonsFormat(data);
     },
     lesson(data) {
-      let [num1, num2] = data.split('.');
-      this.lessonNum = parseInt(num1);
-      this.exercise = parseInt(num2);
+      this.lessonId = data+'.'+this.exercise;
+    },
+    exercise(data) {
+      this.lessonId = this.lesson+'.'+data;
     }
   },
   methods: {
-    changeExercise(exercise) {
-      const lesson = exercise.charAt(1);
-      const ex = exercise.charAt(4);
-      this.$el.querySelector("#label").innerHTML =
-        "Lesson " + lesson + " - Ex. " + ex
+    changeExercise(data) {//exercise) {
+      const [lesson, ex] = data.split('.').map(txt => parseInt(txt));
       this.$emit("change", lesson, ex)
     },
     showDialog() {
       this.$emit("login")
     },
     lessonsFormat(les) {
-    let obj = {};
-    for (let l of les) {
-      if (!obj[l.lesson]) {
-        obj[l.lesson] = [l];
-      } else {
-        obj[l.lesson].push(l)
+      let obj = {};
+      for (let l of les) {
+        if (!obj[l.lesson]) {
+          obj[l.lesson] = [l];
+        } else {
+          obj[l.lesson].push(l)
+        }
       }
-    }
-    return obj
+      return obj
     }
   },
 };

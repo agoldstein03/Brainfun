@@ -57,6 +57,8 @@ export default {
   color: #ff0aaf;
   margin-top: -10px;
   margin-bottom: 10px;
+  margin-left: 1em;
+  margin-right: 1em;
 }
 
 #message {

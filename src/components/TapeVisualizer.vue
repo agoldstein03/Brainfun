@@ -37,9 +37,10 @@ function updateDisplayGrid() {
 
 export default {
   name: "TapeVisualizer",
-  prop: [
+  props: [
     'output',
-    'code'
+    'code',
+    'checker'
   ],
   data: function() {
     return {
@@ -88,7 +89,7 @@ export default {
       //this.displayGrid.unshift({value: this.grid[index] ? this.grid[index] : 0, originalIndex: index})
     },
     read() {
-      this.output += String.fromCharCode(((this.grid[this.pointer] + 256) % 128));
+      this.$emit('changeOutput', (String.fromCharCode(((this.grid[this.pointer] + 256) % 128))));
     },
     write() {
       this.$parent.getInput();
@@ -106,7 +107,7 @@ export default {
     },
     run() {
       this.codePointer = 0;
-      this.internalCode = this.$attrs.code;//this.clean(this.$attrs.code);
+      this.internalCode = this.code;//this.clean(this.$attrs.code);
       this.shouldStop = false;
       this.tick();
     },
@@ -117,7 +118,28 @@ export default {
       this.shouldStop = true;
     },
     submit() {
-      return {correct: false, reason: "A good reason"}
+      let shrunkenGrid = this.shrinkGrid();
+      this.reset();
+      return new Function('code', 'memory', 'output', this.checker)(this.clean(this.code), shrunkenGrid, this.output);// {correct: true, reason: "A good reason"}
+    },
+    shrinkGrid() {
+      let map = Object.keys(this.grid).map(txt => parseInt(txt)),
+          start = Math.min(...map, 0),
+          end = Math.max(...map, 0),
+          array = [];
+      while (start != 0 && this.grid[start] == 0) {
+        map.splice(map.indexOf(start), 1);
+        start = Math.min(...map, 0);
+      }
+      while (start != 0 && this.grid[end] == 0) {
+        map.splice(map.indexOf(end), 1);
+        start = Math.max(...map, 0);
+      }
+      for (let i = start; i <= end; i++) {
+        array[i] = this.grid[i] ? this.grid[i] : 0;
+      }
+      console.log(array);
+      return array
     },
     tick() {
       console.log(this);
@@ -192,6 +214,7 @@ export default {
       this.grid = [];
       this.pointer = 0;
       this.output = "";
+      this.$emit('reset')
     },
     clean(stuff) {
       return stuff.replace(/[^-+><[\]].,]/g, '');
@@ -212,6 +235,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+
+.container {
+  background-color: #262626 /*rgb(69, 69, 69)*/ !important;
+}
 
 .arrow {
   width: 100%;
@@ -235,6 +262,10 @@ export default {
 .content {
   --transformTime: 1s;
   overflow: hidden;
+}
+
+.sub, .num-item, .arrow > i {
+  color: white !important;
 }
 
 .num-item {

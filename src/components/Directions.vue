@@ -7,7 +7,33 @@
       </md-tab>
 
       <md-tab id="tab-references" md-label="REFERENCES">
-        <p v-bind:style="styleObject">Unde provident nemo reiciendis officia, possimus repellendus. Facere dignissimos dicta quis rem. Aliquam aspernatur dolor atque nisi id deserunt laudantium quam repellat.</p>
+        <pre v-bind:style="styleObject">Dec  Char     Dec  Char       Dec  Char	       Dec  Char
+---------     ---------       ----------       ---------
+32  SPACE	57  9		82  R		107  k
+33  !		58  :		83  S		108  l
+34  "		59  ;		84  T 		109  m
+35  #		60  &lt;		85  U		110  n
+36  $		61  =		86  V		111  o
+37  %		62  &gt;		87  W		112  p
+38  &amp;		63  ?		88  X		113  q
+39  '		64  @		89  Y		114  r
+40  (		65  A		90  Z 		115  s
+41  )		66  B		91  [		116  t
+42  *		67  C		92    		117  u
+43  +		68  D		93  ]		118  v
+44  ,		69  E		94  ^		119  w
+45  -		70  F		95  _		120  x
+46  .		71  G		96  `		121  y
+47  /		72  H		97  a		122  z
+48  0		73  I		98  b		123  {
+49  1		74  J		99  c		124  |
+50  2		75  K		100  d		125  }
+51  3		76  L		101  e		126  ~
+52  4		77  M		102  f		127  DEL
+53  5		78  N		103  g
+54  6		79  O		104  h
+55  7		80  P		105  i
+56  8  		81  Q		106  j</pre>
       </md-tab>
 
       <md-tab id="tab-hints" md-label="HINTS">
@@ -66,6 +92,13 @@ export default {
 ::v-deep .md-tabs-content {
   //min-height: 0;
   //overflow-y: scroll !important;
+  height: unset !important;
+  min-height: 0;
+}
+
+::v-deep .md-active {
+  background-image: linear-gradient(to left, #ffa207, #ff901b, #ff7f2a, #ff6d36, #ff5b42, #ff4d4e, #ff3e5a, #ff2e67, #ff1f78, #ff0e8a, #ff039d, #ff0bb2);
+  color:white !important;
 }
 
 .desc {
