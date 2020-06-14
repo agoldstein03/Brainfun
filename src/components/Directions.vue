@@ -25,9 +25,9 @@ export default {
     };
   },
   methods: {
-    changeExercise(lesson, ex) {
-      
-    }
+    // changeExercise(lesson, ex) {
+
+    // }
   }
 };
 </script>
