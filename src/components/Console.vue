@@ -147,10 +147,6 @@ $buttonVerticalSpace: $consolePadding / 2;
   position: absolute;
   top: 0px;
   left: 0px;
-  color: white;
-  letter-spacing: 0.01em;
-  line-height: 30px !important;
-  font-size: 24px !important;
   //padding: 16px !important;
   //padding-right: 52px !important;
   margin: 0 !important;
@@ -160,11 +156,13 @@ $buttonVerticalSpace: $consolePadding / 2;
   width: 100%;
 }
 
-.codeContainer {
+.codeContainer, .code {
   color: white;
   letter-spacing: 0.01em;
   line-height: 30px !important;
   font-size: 24px !important;
+  font-weight: bold;
+  letter-spacing: 0.1em;
 }
 
 .md-textarea {
