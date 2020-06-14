@@ -1,5 +1,5 @@
-# brainfun
-
+# BrainFun
+Recieved Honorable Mention at Same Home Different Hacks 2020 
 ## Project setup
 ```
 npm install
