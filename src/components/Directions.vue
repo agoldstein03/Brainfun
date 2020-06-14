@@ -3,7 +3,7 @@
     <md-tabs  class="md-transparent" md-alignment="fixed">
       <md-tab id="tab-task" md-label="TASK" exact>
         <h1>{{ this.$parent.lesson }} - {{ lessonData ? lessonData.lessonTitle : '' }}</h1>
-        <p v-bind:style="styleObject">{{ lessonData ? lessonData.directions : '' }}>{{ lessonData ? lessonData.directions : '' }}</p>
+        <p v-bind:style="styleObject">{{ lessonData ? lessonData.directions : '' }}</p>
       </md-tab>
 
       <md-tab id="tab-references" md-label="REFERENCES">

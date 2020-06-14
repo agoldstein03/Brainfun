@@ -11,7 +11,7 @@
             <Directions :lessonData="lessonData" ref="directions" />
           </div>
           <div id="console" class="md-layout-item">
-            <Console v-on:submit="submit" ref="console" />
+            <Console v-on:play="play" v-on:stop="forceStop" v-on:submit="submit" ref="console" />
           </div>
         </div>
       </div>
@@ -29,10 +29,10 @@
     </div>
     
     <div id="bottom">
-      <TapeVisualizer :output="output" id="tape" ref="tape" />
+      <TapeVisualizer v-on:done="stop" :output="output" id="tape" ref="tape" />
     </div>
     <Login ref="login" />
-    <SubmitDialog :success="correct" :message="msg" ref="submit" />
+    <SubmitDialog v-on:nextLesson="nextLesson" :success="correct" :message="msg" ref="submit" />
   </div>
 </template>
 
@@ -112,6 +112,10 @@ export default {
         this.$refs.tape.add();
       } else if (command === "-") {
         this.$refs.tape.subtract();
+      } else if (command === ".") {
+        this.$refs.tape.readButton();
+      } else if (command === ",") {
+        this.$refs.tape.writeButton();
       }
     },
     changeExercise(lesson, ex) {
@@ -120,7 +124,19 @@ export default {
     login() {
       this.$refs.login.login();
     },
+    play() {
+      this.$refs.tape.run();
+    },
+    forceStop() {
+      this.$refs.tape.stop();
+    },
+    stop() {
+      this.$refs.console.stop()
+    },
     submit() {
+      const response = this.$refs.tape.submit();
+      this.correct = response.correct;
+      this.msg = response.reason;
       this.$refs.submit.showDialog();
     },
     nextLesson() {

@@ -86,7 +86,7 @@ export default {
       //this.displayGrid.unshift({value: this.grid[index] ? this.grid[index] : 0, originalIndex: index})
     },
     read() {
-
+      
     },
     write() {
 
@@ -98,7 +98,7 @@ export default {
 
     },
     run() {
-      this.$emit('done');
+      this.$emit("done")
     },
     stop() {
       this.shouldStop = true;

@@ -2,16 +2,16 @@
   <div>
     <md-dialog :md-active.sync="show">
       <md-dialog-title>Submission</md-dialog-title>
-      <div v-if="!success" id="error-message">
+      <div v-if="!correct" id="error-message">
         <p>{{ message }}</p>
       </div>
       <div v-else id="message">
         <p>Nice work!</p>
       </div>
-      <md-button v-if="!success" class="failure md-raised md-primary" @click="show = false">
+      <md-button v-if="!correct" class="failure md-raised md-primary" @click="show = false">
         Try Again
       </md-button>
-      <md-button v-else class="success md-raised md-primary" @click="nextLesson">
+      <md-button v-else class="correct md-raised md-primary" @click="nextLesson">
         Next Lesson
       </md-button>
     </md-dialog>
@@ -20,14 +20,14 @@
 
 <script>
 export default {
-  name: "Submit",
+  name: "SubmitDialog",
   data: function() {
     return {
       show: false,
     };
   },
   props: {
-      success: Boolean,
+      correct: Boolean,
       message: String
   },
   methods: {
@@ -36,6 +36,7 @@ export default {
     },
     nextLesson() {
         this.show=false
+        this.$emit("nextLesson")
     }
   },
 };
@@ -48,7 +49,7 @@ export default {
 .failure {
     background-color: #ff0aaf !important;
 }
-.success {
+.correct {
     background-color: #ffa009 !important;
 }
 #error-message {

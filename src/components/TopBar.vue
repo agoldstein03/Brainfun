@@ -5,9 +5,8 @@
       <span class="lesson visible"><b id="label">Lesson {{ lessonNum }} - Ex. {{ exercise }}</b><md-icon class="md-size-2x">expand_more</md-icon></span>
       <span class="lesson hidden">
         <md-field class="md-primary">
-          <label for="lessons" id="label">Lessons</label>
+          <label for="lessons">Lessons</label>
           <md-select
-            v-model="lesson"
             name="lessons"
             id="lessons"
             @md-selected="changeExercise"

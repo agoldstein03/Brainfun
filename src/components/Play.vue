@@ -1,7 +1,10 @@
 <template>
-  <div>
-    <md-button class="md-fab md-primary">
+  <div :key="key">
+    <md-button v-if="!playing" @click="press" class="md-fab md-primary">
       <md-icon class="md-size-2x">play_arrow</md-icon>
+    </md-button>
+    <md-button v-else @click="press" class="md-fab md-primary">
+      <md-icon class="md-size-2x">stop</md-icon>
     </md-button>
   </div>
 </template>
@@ -9,7 +12,24 @@
 <script>
 export default {
   name: "Play",
-  data: function() {return {}},
+  data: function() {return {
+    playing: false,
+    key: 0
+  }},
+  methods: {
+    press() {
+      this.playing = !this.playing;
+      if (this.playing) {
+        this.$emit("play")
+      } else {
+        this.$emit("stop")
+      }
+      this.key++
+    }, stop() {
+      this.playing = false;
+      this.key++
+    }
+  }
 };
 </script>
 
