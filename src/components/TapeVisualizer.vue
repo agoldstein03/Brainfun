@@ -37,9 +37,14 @@ function updateDisplayGrid() {
 
 export default {
   name: "TapeVisualizer",
+  prop: [
+    'output'
+  ],
   data: function() {
     return {
       grid: [],
+      shouldStop: false,
+      codePointer: 0,
       //displayGrid: [],
       pointer: 0,
       up: false,
@@ -80,6 +85,36 @@ export default {
       //this.displayGrid.splice(0, 0, {value: this.grid[index] ? this.grid[index] : 0, originalIndex: index})
       //this.displayGrid.unshift({value: this.grid[index] ? this.grid[index] : 0, originalIndex: index})
     },
+    read() {
+
+    },
+    write() {
+
+    },
+    readButton() {
+
+    },
+    writeButton() {
+
+    },
+    run() {
+
+    },
+    stop() {
+      this.shouldStop = true;
+    },
+    submit() {
+      return {correct: false, reason: "A good reason"}
+    },
+    tick() {
+
+    },
+    reset() {
+      this.grid = [];
+      this.pointer = 0;
+      this.output = "";
+    },
+
   },
   computed: {
     displayGrid() {
@@ -105,6 +140,10 @@ export default {
 
 .refresh {
   background-color: #ff8327 !important;
+  position: absolute;
+  right: 0px;
+  top: 6px;
+  display: block;
 }
 
 .sub {

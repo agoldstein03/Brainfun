@@ -2,7 +2,7 @@
   <div class="topbar">
     <md-toolbar class="md-primary">
       <img id="logo" src="../assets/brainfun.png" />
-      <span class="lesson visible"><b id="label">Lesson 2 - Ex. 2</b><md-icon class="md-size-2x">expand_more</md-icon></span>
+      <span class="lesson visible"><b id="label">Lesson {{ lessonNum }} - Ex. {{ exercise }}</b><md-icon class="md-size-2x">expand_more</md-icon></span>
       <span class="lesson hidden">
         <md-field class="md-primary">
           <label for="lessons" id="label">Lessons</label>
@@ -12,8 +12,8 @@
             id="lessons"
             @md-selected="changeExercise"
           >
-            <md-optgroup v-for="(lessonsInfo, lessonNum) in formattedLessons" :key="lessonNum" :label="'Lesson '+lessonNum+': '+lessonsInfo[0].lessonTitle"> 
-              <md-option v-for="lessonInfo in lessonsInfo" :key="lessonInfo.exercise" :value="lessonNum+'.'+lessonInfo.exercise">Exercise {{ lessonInfo.exercise }}</md-option>
+            <md-optgroup v-for="(lessonsInfo, theLessonNum) in formattedLessons" :key="theLessonNum" :label="'Lesson '+theLessonNum+': '+lessonsInfo[0].lessonTitle"> 
+              <md-option v-for="lessonInfo in lessonsInfo" :key="lessonInfo.exercise" :value="theLessonNum+'.'+lessonInfo.exercise">Exercise {{ lessonInfo.exercise }}</md-option>
             </md-optgroup>
           </md-select>
         </md-field>

@@ -10,15 +10,16 @@
           <div class="md-layout-item">
             <Directions :lessonData="lessonData" ref="directions" />
           </div>
-          <div class="md-layout-item">
-            <Output />
+          <div id="console" class="md-layout-item">
+            <Console v-on:submit="submit" ref="console" />
           </div>
         </div>
       </div>
-      <div class="md-layout-item" style="border-left:3px solid black">
+      
+      <div class="md-layout-item">
         <div id="right" class="md-layout">
-          <div id="console" class="md-layout-item">
-            <Console v-on:submit="submit" ref="console" />
+          <div class="md-layout-item">
+            <Output />
           </div>
           <div id="commands" class="md-layout-item">
             <Commands v-on:command="runCommand" />
@@ -26,8 +27,9 @@
         </div>
       </div>
     </div>
+    
     <div id="bottom">
-      <TapeVisualizer id="tape" ref="tape" />
+      <TapeVisualizer :output="output" id="tape" ref="tape" />
     </div>
     <Login ref="login" />
     <SubmitDialog :success="correct" :message="msg" ref="submit" />
@@ -52,6 +54,7 @@ export default {
   name: "App",
   data: function() {
     return {
+      output: "",
       fullLesson: "2.1",
       lesson: 2,
       exercise: 1,
@@ -119,7 +122,7 @@ export default {
     },
     submit() {
       this.$refs.submit.showDialog();
-    },
+    }
   },
 };
 </script>
@@ -145,12 +148,24 @@ body {
   height: 100%;
   display: flex;
   flex-direction: column;
+
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+
+}
+
+#middle > div:first-child {
+  flex: 1 1;
+}
+
+#middle > div:last-child {
+  flex: 0 0;
 }
 
 #middle {
   flex: 1 1;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   //height: 70vh;
 }
 

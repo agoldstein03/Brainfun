@@ -1,12 +1,17 @@
 <template>
     <div class="container">
-        Output
+        Output:
+        <br>
+        {{ output }}
     </div>
 </template>
 
 <script>
 export default {
     name: "Output",
+    props: [
+        'output'
+    ],
     data: function() {
         return {}
     }
