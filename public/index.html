@@ -6,10 +6,41 @@
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <link rel="icon" href="<%= BASE_URL %>favicon.ico">
     <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto:400,500,700,400italic|Material+Icons">
+    <!-- 
     <script src="/__/firebase/7.6.2/firebase-app.js"></script>
     <script src="/__/firebase/7.6.2/firebase-auth.js"></script>
     <script src="/__/firebase/7.6.2/firebase-firestore.js"></script>
     <script src="/__/firebase/init.js"></script>
+    -->
+      <!-- Firebase App (the core Firebase SDK) is always required and must be listed first -->
+  <script src="https://www.gstatic.com/firebasejs/7.15.0/firebase-app.js"></script>
+
+  <!-- If you enabled Analytics in your project, add the Firebase SDK for Analytics -->
+  <script src="https://www.gstatic.com/firebasejs/7.15.0/firebase-analytics.js"></script>
+
+  <!-- Add Firebase products that you want to use -->
+  <script src="https://www.gstatic.com/firebasejs/7.15.0/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.15.0/firebase-firestore.js"></script>
+  <script>
+    if (typeof firebase === 'undefined') throw new Error('hosting/init-error: Firebase SDK not detected. You must include it before /__/firebase/init.js');
+var firebaseConfig = {
+  "projectId": "brainfun-hackathon",
+  "appId": "1:861334993637:web:cdd31194f5dfb35065320c",
+  "databaseURL": "https://brainfun-hackathon.firebaseio.com",
+  "storageBucket": "brainfun-hackathon.appspot.com",
+  "locationId": "us-central",
+  "apiKey": "AIzaSyAfXHKCEnGxxd9-4LYx0QMg6IHoynjAqLg",
+  "authDomain": "brainfun-hackathon.firebaseapp.com",
+  "messagingSenderId": "861334993637",
+  "measurementId": "G-3V5KNQTC59"
+};
+if (firebaseConfig) {
+  firebase.initializeApp(firebaseConfig);
+}
+  </script>
+
+
+
     <title>BrainFUN</title>
   </head>
   <body>

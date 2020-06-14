@@ -5,7 +5,7 @@
     </div>
     <div id="middle" class="md-layout">
       <div class="md-layout-item">
-        <Directions ref="directions"/>
+        <Directions :lessonData="lessonData" ref="directions"/>
       </div>
       <div class="md-layout-item" style="border-left:3px solid black">
         <div id="right" class="md-layout">
@@ -35,6 +35,11 @@ import Commands from "./components/Commands.vue";
 import Login from "./components/Login.vue";
 import SubmitDialog from "./components/SubmitDialog.vue";
 
+
+/* globals firebase */
+
+let db = firebase.firestore();
+
 export default {
   name: "App",
   data: function() {
@@ -51,6 +56,34 @@ export default {
     Commands,
     Login,
     SubmitDialog
+  },
+  //firestore: {
+  //  lessons: db.collection('lessons'),
+  //},
+  data() {
+    return {
+      lesson: 2,
+      exercise: 1,
+      lessons: null,
+      lessonData: null,
+      //realLessonData: this.lessonData.doc(this.lesson+"."+this.exercise)
+    }
+  },
+  watch: {
+    lesson: {
+      // call it upon creation too
+      immediate: true,
+      handler(num) {
+        this.$bind('lessonData', db.collection('lessons').doc(num+"."+this.exercise))
+      },
+    },
+    exercise: {
+      // call it upon creation too
+      immediate: true,
+      handler(num) {
+        this.$bind('lessonData', db.collection('lessons').doc(this.exercise+"."+num))
+      },
+    },
   },
   methods: {
     runCommand(command) {
