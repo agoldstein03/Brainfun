@@ -5,8 +5,8 @@
         <md-icon>menu</md-icon>
       </md-button>
       <img id="logo" src="../assets/brainfun.png" />
-      <span v-if="showLesson" class="lesson visible"><b id="label">Lesson 2 - Ex. 2</b><md-icon class="md-size-2x">expand_more</md-icon></span>
-      <span v-if="showLesson" class="lesson hidden">
+      <span class="lesson visible"><b id="label">Lesson 2 - Ex. 2</b><md-icon class="md-size-2x">expand_more</md-icon></span>
+      <span class="lesson hidden">
         <md-field class="md-primary">
           <label for="lessons" id="label">Lessons</label>
           <md-select
@@ -44,9 +44,6 @@
 <script>
 export default {
   name: "TopBar",
-  props: {
-    showLesson: Boolean,
-  },
   data: () => ({
     showNavigation: false,
     lesson: "l2ex1",
