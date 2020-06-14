@@ -18,11 +18,11 @@ export default {
 .md-fab {
   margin-right: 0;
   margin-left: 0;
-  background-color: white;
+  background-color: white !important;
 }
 
 .md-icon {
-  color: #FF0BB2;
+  color: #FF0BB2 !important;
 }
 
 </style>

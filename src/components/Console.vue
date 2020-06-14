@@ -168,7 +168,15 @@ $buttonVerticalSpace: $consolePadding / 2;
 }
 
 .md-textarea {
-  color: white;
-  -webkit-text-fill-color: transparent;
+  color: white !important;
+  -webkit-text-fill-color: transparent !important;
+}
+
+.md-field.md-theme-default:before {
+  background-color: rgb(69, 69, 69) !important;
+}
+
+.md-field.md-theme-default:after {
+  background-color: rgb(69, 69, 69) !important;
 }
 </style>

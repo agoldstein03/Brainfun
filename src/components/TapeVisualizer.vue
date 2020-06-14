@@ -93,7 +93,6 @@ export default {
 
 .arrow {
   width: 100%;
-  background: white;
   text-align: center;
   z-index: 1;
 }
