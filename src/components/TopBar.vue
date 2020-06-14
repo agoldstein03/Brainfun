@@ -5,7 +5,7 @@
         <md-icon>menu</md-icon>
       </md-button>
       <img id="logo" src="../assets/brainfun.png" />
-      <span class="lesson visible"><b id="label">Lesson 2 - Exercise 2</b><md-icon class="md-size-2x">expand_more</md-icon></span>
+      <span class="lesson visible"><b id="label">Lesson 2 - Ex. 2</b><md-icon class="md-size-2x">expand_more</md-icon></span>
       <span class="lesson hidden">
         <md-field class="md-primary">
           <label for="lessons" id="label">Lessons</label>
@@ -52,14 +52,14 @@ export default {
     const lesson = this.lesson.charAt(1);
     const ex = this.lesson.charAt(4);
     this.$el.querySelector("#label").innerHTML =
-      "Lesson " + lesson + " - Exercise " + ex
+      "Lesson " + lesson + " - Ex. " + ex
   },
   methods: {
     changeExercise(exercise) {
       const lesson = exercise.charAt(1);
       const ex = this.lesson.charAt(4);
       this.$el.querySelector("#label").innerHTML =
-        "Lesson " + lesson + " - Exercise " + ex
+        "Lesson " + lesson + " - Ex. " + ex
     },
     showMenu() {
     }
@@ -126,12 +126,12 @@ export default {
 }
 
 .lesson {
-  width: 50%;
+  width: 280px;
   position: absolute;
   margin-left: auto;
   margin-right: auto;
   padding-top: 6px;
-  padding-left: 4vw;
+  padding-left: 25px;
   left: 0;
   right: 0;
   text-align: center;
