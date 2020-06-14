@@ -38,13 +38,15 @@ function updateDisplayGrid() {
 export default {
   name: "TapeVisualizer",
   prop: [
-    'output'
+    'output',
+    'code'
   ],
   data: function() {
     return {
       grid: [],
       shouldStop: false,
       codePointer: 0,
+      internalCode: "",
       //displayGrid: [],
       pointer: 0,
       up: false,
@@ -86,18 +88,27 @@ export default {
       //this.displayGrid.unshift({value: this.grid[index] ? this.grid[index] : 0, originalIndex: index})
     },
     read() {
-
+      this.output += String.fromCharCode(((this.grid[this.pointer] + 256) % 128));
     },
     write() {
-
+      this.$parent.getInput();
+    },
+    writeValue(input) {
+      this.grid[this.pointer] = input ? (((input.charCodeAt(0) + 384) % 256) - 128) : 0;
+      window.setTimeout(this.ticks, 500);
     },
     readButton() {
-
+      this.read();
     },
     writeButton() {
-
+      this.write();
     },
     run() {
+      this.codePointer = 0;
+      this.internalCode = this.code;
+      this.tick();
+    },
+    signalStop() {
       this.$emit('done');
     },
     stop() {
@@ -107,7 +118,60 @@ export default {
       return {correct: false, reason: "A good reason"}
     },
     tick() {
-
+      switch (this.internalCode[this.codePointer]) {
+        case "+":
+          this.add()
+          break;
+        case "-":
+          this.subtract();
+          break;
+        case ">":
+          this.right();
+          break;
+        case "<":
+          this.left();
+          break;
+        case ".":
+          this.read();
+          break;
+        case ",":
+          this.write();
+          break;
+        case "[":
+          if (this.grid[this.pointer] == 0) {
+            let parens = 0;
+            while (!(this.internalCode[this.codePointer] == "]" && parens == 0)) {
+              if (this.internalCode[this.codePointer] == "]") {
+                parens++;
+              }
+              this.codePointer++;
+              if (this.codePointer >= this.internalCode.length) {
+                this.signalStop();
+                return;
+              }
+            }
+          }
+          break;
+        case "]":
+          if (this.grid[this.pointer] == 0) {
+            let parens = 0;
+            while (!(this.internalCode[this.codePointer] == "[" && parens == 0)) {
+              if (this.internalCode[this.codePointer] == "[") {
+                parens++;
+              }
+              this.codePointer--;
+              if (this.codePointer < 0) {
+                this.signalStop();
+                return;
+              }
+            }
+          }
+          break;
+      }
+      this.codePointer++;
+      if (!this.shouldStop && this.codePointer < this.internalCode.length) {
+        window.setTimeout(this.ticks, 500);
+      }
     },
     reset() {
       this.grid = [];

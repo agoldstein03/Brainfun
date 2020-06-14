@@ -1,9 +1,9 @@
 <template>
   <div class="container">
-    <md-tabs  class="md-transparent" md-alignment="fixed">
+    <md-tabs class="md-transparent" md-alignment="fixed">
       <md-tab id="tab-task" md-label="TASK" exact>
         <h1>{{ this.$parent.lesson }} - {{ lessonData ? lessonData.lessonTitle : '' }}</h1>
-        <p v-bind:style="styleObject">{{ lessonData ? lessonData.directions : '' }}>{{ lessonData ? lessonData.directions : '' }}</p>
+        <p class="desc" v-bind:style="styleObject">{{ lessonData ? lessonData.directions : '' }}</p>
       </md-tab>
 
       <md-tab id="tab-references" md-label="REFERENCES">
@@ -44,6 +44,16 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+
+::v-deep .md-tabs-content {
+  //min-height: 0;
+  //overflow-y: scroll !important;
+}
+
+.desc {
+  white-space: pre-line;
+}
+
 .container {
   overflow: auto;
   height: 100%;

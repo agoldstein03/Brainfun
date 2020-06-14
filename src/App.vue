@@ -11,7 +11,7 @@
             <Directions :lessonData="lessonData" ref="directions" />
           </div>
           <div id="console" class="md-layout-item">
-            <Console v-on:submit="submit" ref="console" />
+            <Console v-bind:code.sync="code" v-on:submit="submit" ref="console" />
           </div>
         </div>
       </div>
@@ -29,7 +29,7 @@
     </div>
     
     <div id="bottom">
-      <TapeVisualizer :output="output" id="tape" ref="tape" />
+      <TapeVisualizer :checker="lessonData ? lessonData.checker : ''" :code="code" :output="output" id="tape" ref="tape" />
     </div>
     <Login ref="login" />
     <SubmitDialog :success="correct" :message="msg" ref="submit" />
@@ -54,12 +54,13 @@ export default {
   name: "App",
   data: function() {
     return {
+      code: "",
       output: "",
-      fullLesson: "2.1",
-      lesson: 2,
+      fullLesson: "1.1",
+      lesson: 1,
       exercise: 1,
       lessons: null,
-      lessonData: {lessonTitle: ""},
+      lessonData: {lessonTitle: "", checker: ""},
       correct: true,
       msg: "You failed!",
       //realLessonData: this.lessonData.doc(this.lesson+"."+this.exercise)
@@ -79,25 +80,29 @@ export default {
   //  lessons: db.collection('lessons'),
   //},
   created() {
-    this.$bind('lessonData', db.collection('lessons').doc(this.lesson+"."+this.exercise))
+    this.$bind('lessonData', db.collection('lessons').doc(this.fullLesson))
   },
   watch: {
-    lesson: {
+    fullLesson: {
       // call it upon creation too
       immediate: true,
       handler(num) {
         console.log(db);
-        this.$bind('lessonData', db.collection('lessons').doc(num+"."+this.exercise))
+        this.$bind('lessonData', db.collection('lessons').doc(num))
+      },
+    },
+    lesson: {
+      // call it upon creation too
+      immediate: true,
+      handler(num) {
+        this.fullLesson = num+'.'+this.exercise;
       },
     },
     exercise: {
       // call it upon creation too
       immediate: true,
       handler(num) {
-        this.$bind(
-          "lessonData",
-          db.collection("lessons").doc(this.exercise + "." + num)
-        );
+        this.fullLesson = this.lesson+'.'+num;
       },
     },
   },
@@ -124,7 +129,7 @@ export default {
       this.$refs.submit.showDialog();
     },
     nextLesson() {
-      
+
     }
   },
 };

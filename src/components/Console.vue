@@ -32,9 +32,11 @@ export default {
     Submit,
     Mark
   },
+  prop: [
+    'code'
+  ],
   data: function() {
     return {
-      code: "",
       key: 0,
     };
   },
