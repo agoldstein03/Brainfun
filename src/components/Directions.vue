@@ -57,7 +57,7 @@ export default {
 .container {
   overflow: auto;
   height: 100%;
-  box-shadow: 
+  box-shadow:
     inset 0px -9px 8px -10px black;
 }
 .content {

@@ -61,7 +61,7 @@ export default {
       this.up = false;
       //this.$set(this.up, this.pointer, 1);
       this.$nextTick(function () {
-        this.$set(this.grid, this.pointer, (((this.grid[this.pointer] ? this.grid[this.pointer] : 0) + 1 + 384) % 256) - 128); 
+        this.$set(this.grid, this.pointer, (((this.grid[this.pointer] ? this.grid[this.pointer] : 0) + 1 + 384) % 256) - 128);
       })
     },
     subtract() {

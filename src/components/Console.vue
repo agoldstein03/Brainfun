@@ -12,7 +12,7 @@
       ></md-textarea>
     </md-field>
     <div class="buttons">
-      <Play id="play" />
+      <Play v-on:play="play" v-on:stop="forceStop" ref="play" id="play" />
       <Submit v-on:submit="submit" id="submit" />
     </div>
   </div>
@@ -56,6 +56,15 @@ export default {
     },
     addChar: function(char) {
       this.code = this.code.concat(char);
+    },
+    play() {
+      this.$emit("play")
+    },
+    forceStop() {
+      this.$emit("stop")
+    },
+    stop() {
+      this.$refs.play.stop()
     },
     submit() {
       this.$emit("submit")

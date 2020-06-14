@@ -11,11 +11,11 @@
             <Directions :lessonData="lessonData" ref="directions" />
           </div>
           <div id="console" class="md-layout-item">
-            <Console v-bind:code.sync="code" v-on:submit="submit" ref="console" />
+            <Console v-bind:code.sync="code" v-on:play="play" v-on:stop="forceStop" v-on:submit="submit" ref="console" />
           </div>
         </div>
       </div>
-      
+
       <div class="md-layout-item">
         <div id="right" class="md-layout">
           <div class="md-layout-item">
@@ -27,12 +27,20 @@
         </div>
       </div>
     </div>
-    
+
     <div id="bottom">
-      <TapeVisualizer :checker="lessonData ? lessonData.checker : ''" :code="code" :output="output" id="tape" ref="tape" />
+      <TapeVisualizer :checker="lessonData ? lessonData.checker : ''" :code="code" v-on:done="stop" :output="output" id="tape" ref="tape" />
     </div>
     <Login ref="login" />
-    <SubmitDialog :success="correct" :message="msg" ref="submit" />
+    <SubmitDialog v-on:nextLesson="nextLesson" :success="correct" :message="msg" ref="submit" />
+    <md-dialog-prompt
+    v-model="char"
+      :md-active.sync="active"
+      md-title="Input a character"
+      md-input-maxlength="1"
+      md-confirm-text="Done"
+      @md-confirm="callRightValue"
+      @md-cancel="callRightValue('')" />
   </div>
 </template>
 
@@ -63,6 +71,8 @@ export default {
       lessonData: {lessonTitle: "", checker: ""},
       correct: true,
       msg: "You failed!",
+      active: true,
+      char: ""
       //realLessonData: this.lessonData.doc(this.lesson+"."+this.exercise)
     };
   },
@@ -117,6 +127,10 @@ export default {
         this.$refs.tape.add();
       } else if (command === "-") {
         this.$refs.tape.subtract();
+      } else if (command === ".") {
+        this.$refs.tape.readButton();
+      } else if (command === ",") {
+        this.$refs.tape.writeButton();
       }
     },
     changeExercise(lesson, ex) {
@@ -125,11 +139,28 @@ export default {
     login() {
       this.$refs.login.login();
     },
+    play() {
+      this.$refs.tape.run();
+    },
+    forceStop() {
+      this.$refs.tape.stop();
+    },
+    stop() {
+      this.$refs.console.stop()
+    },
     submit() {
+      const response = this.$refs.tape.submit();
+      this.correct = response.correct;
+      this.msg = response.reason;
       this.$refs.submit.showDialog();
     },
     nextLesson() {
-
+    },
+    callRightValue(value) {
+      this.$refs.tape.rightValue(value)
+    },
+    getInput() {
+      this.active = true;
     }
   },
 };
