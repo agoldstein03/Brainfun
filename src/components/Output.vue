@@ -14,7 +14,5 @@ export default {
 </script>
 <style lang="scss" scoped>
 .container {
-    box-shadow: 
-    inset 0px -9px 8px -10px black; 
 }
 </style>

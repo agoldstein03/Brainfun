@@ -59,35 +59,18 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.md-title {
-  color: white !important;
-}
 
 .md-toolbar {
   height: 10vh;
-  background-image: linear-gradient(
-    to left,
-    #ffa207,
-    #ff901b,
-    #ff7f2a,
-    #ff6d36,
-    #ff5b42,
-    #ff4d4e,
-    #ff3e5a,
-    #ff2e67,
-    #ff1f78,
-    #ff0e8a,
-    #ff039d,
-    #ff0bb2
-  );
+  background-color: #fafafa !important;
 }
 
 .md-icon {
-  color: white !important;
+  color: #0b0b0b !important;
 }
 
 .md-icon-button {
-  color: white;
+  color: #0b0b0b;
 }
 
 .md-drawer {
@@ -118,7 +101,7 @@ export default {
   right: 0;
   text-align: center;
   font-size: 28px;
-  color: white;
+  color: #0b0b0b;
 }
 
 #logo {
