@@ -10,7 +10,7 @@
       <div class="md-layout-item" style="border-left:3px solid black">
         <div id="right" class="md-layout">
           <div id="console" class="md-layout-item">
-            <Console ref="console"/>
+            <Console v-on:submit="submit" ref="console"/>
           </div>
           <div id="commands" class="md-layout-item">
             <Commands v-on:command="runCommand"/>
@@ -22,6 +22,7 @@
       <TapeVisualizer id="tape" ref="tape"/>
     </div>
     <Login ref="login"/>
+    <SubmitDialog :success="correct" :message="msg" ref="submit"/>
   </div>
 </template>
 
@@ -32,16 +33,24 @@ import Console from "./components/Console.vue";
 import TapeVisualizer from "./components/TapeVisualizer.vue";
 import Commands from "./components/Commands.vue";
 import Login from "./components/Login.vue";
+import SubmitDialog from "./components/SubmitDialog.vue";
 
 export default {
   name: "App",
+  data: function() {
+    return {
+      correct: true,
+      msg: "You failed!"
+    };
+  },
   components: {
     TopBar,
     Directions,
     Console,
     TapeVisualizer,
     Commands,
-    Login
+    Login,
+    SubmitDialog
   },
   methods: {
     runCommand(command) {
@@ -61,6 +70,9 @@ export default {
     },
     login() {
       this.$refs.login.login()
+    },
+    submit() {
+      this.$refs.submit.showDialog()
     }
   }
 };

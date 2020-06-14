@@ -13,7 +13,7 @@
     </md-field>
     <div class="buttons">
       <Play id="play" />
-      <Submit id="submit" />
+      <Submit v-on:submit="submit" id="submit" />
     </div>
   </div>
 </template>
@@ -55,6 +55,9 @@ export default {
     addChar: function(char) {
       this.code = this.code.concat(char);
     },
+    submit() {
+      this.$emit("submit")
+    }
   },
 };
 </script>

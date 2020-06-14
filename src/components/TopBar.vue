@@ -46,7 +46,7 @@ export default {
   methods: {
     changeExercise(exercise) {
       const lesson = exercise.charAt(1);
-      const ex = this.lesson.charAt(4);
+      const ex = exercise.charAt(4);
       this.$el.querySelector("#label").innerHTML =
         "Lesson " + lesson + " - Ex. " + ex
       this.$emit("change", lesson, ex)
