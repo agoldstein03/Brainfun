@@ -71,7 +71,7 @@ export default {
       lessonData: {lessonTitle: "", checker: ""},
       correct: true,
       msg: "You failed!",
-      active: true,
+      active: false,
       char: ""
       //realLessonData: this.lessonData.doc(this.lesson+"."+this.exercise)
     };
