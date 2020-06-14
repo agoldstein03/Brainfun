@@ -208,15 +208,19 @@ auth.onAuthStateChanged((function(user) {
     },
     getInput() {
       this.active = true;
+    },
+    sizeMiddle() {
+      const pageHeight = window.innerHeight
+      const topHeight = document.getElementById("top").clientHeight
+      const shrinkHeight = document.getElementsByClassName("shrink")[0].clientHeight
+      const bottomHeight = document.getElementById("bottom").clientHeight
+      this.middleHeight = pageHeight - topHeight - shrinkHeight - bottomHeight + 1
     }
   },
   mounted() {
-    const pageHeight = window.innerHeight
-    const topHeight = document.getElementById("top").clientHeight
-    const shrinkHeight = document.getElementsByClassName("shrink")[0].clientHeight
-    const bottomHeight = document.getElementById("bottom").clientHeight
-    this.middleHeight = pageHeight - topHeight - shrinkHeight - bottomHeight
-  }
+    this.sizeMiddle()
+    window.addEventListener("resize", this.sizeMiddle())
+  },
 };
 </script>
 
