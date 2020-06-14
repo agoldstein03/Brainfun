@@ -122,6 +122,9 @@ export default {
     },
     submit() {
       this.$refs.submit.showDialog();
+    },
+    nextLesson() {
+      
     }
   },
 };
