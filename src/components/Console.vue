@@ -3,6 +3,7 @@
     <md-field id="editor">
       <p id="formatted" class="code" spellcheck="false"></p>
       <md-textarea
+        spellcheck="false"
         class="code"
         :key="key"
         md-autogrow

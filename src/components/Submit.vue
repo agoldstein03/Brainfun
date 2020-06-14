@@ -1,6 +1,6 @@
 <template>
   <div>
-    <md-button class="md-icon-button md-raised md-primary">
+    <md-button class="md-fab md-primary">
       <md-icon>done</md-icon>
     </md-button>
   </div>
@@ -14,17 +14,15 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "~vue-material/dist/theme/engine";
 
-@include md-register-theme("default", (
-  primary: #FF0BB2
-));
-
-@import "~vue-material/dist/components/MdButton/theme";
-
-.md-icon-button {
+.md-fab {
   margin-right: 0;
   margin-left: 0;
+  background-color: white;
+}
+
+.md-icon {
+  color: #FF0BB2;
 }
 
 </style>
