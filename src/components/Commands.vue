@@ -62,16 +62,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "~vue-material/dist/theme/engine";
-
-@include md-register-theme(
-  "default",
-  (
-    primary: #ffffff,
-  )
-);
-
-@import "~vue-material/dist/components/MdButton/theme";
 
 .container {
   background-image: linear-gradient(
@@ -91,8 +81,8 @@ export default {
   );
   overflow: auto;
 
-  box-shadow: 
-    inset 0px -9px 8px -10px black;  
+  box-shadow:
+    inset 0px -9px 8px -10px black;
 }
 
 .content {
@@ -138,6 +128,7 @@ export default {
   color: #7b4ce8 !important;
 }
 
-
-
+.md-button {
+  background-color: white;
+}
 </style>
