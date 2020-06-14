@@ -1,6 +1,6 @@
 <template>
   <div>
-    <md-button class="md-fab md-primary">
+    <md-button @click="submit" class="md-fab md-primary">
       <md-icon class="md-size-2x">done</md-icon>
     </md-button>
   </div>
@@ -9,7 +9,13 @@
 <script>
 export default {
   name: "Submit",
-  data: function() {return {}},
+  data: function() {return {
+  }},
+  methods: {
+    submit() {
+      this.$emit("submit")
+    }
+  }
 };
 </script>
 
