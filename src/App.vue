@@ -5,9 +5,10 @@
       <TopBar :lesson="lesson" :exercise="exercise" v-on:change="changeExercise" v-on:login="login" />
     </div>
     <!-- <div id="middle" class="md-layout"> -->
-      <div class="md-layout-item">
+      <div class="not-shrunk md-layout-item">
         <div id="right" class="md-layout">
-          <div class="md-layout-item">
+          <div class="md-layout-item"
+        :style="{'max-height': `${middleHeight}px`,'height': `${middleHeight}px`,'min-height': `${middleHeight}px`}">
             <Directions :lesson="lesson" :exercise="exercise" :lessonData="lessonData ? lessonData : {'hints': []}" ref="directions" />
           </div>
           <div id="console" class="md-layout-item">
@@ -72,7 +73,8 @@ export default {
       correct: true,
       msg: "You failed!",
       active: false,
-      char: ""
+      char: "",
+      middleHeight: 600
       //realLessonData: this.lessonData.doc(this.lesson+"."+this.exercise)
     };
   },
@@ -178,6 +180,13 @@ export default {
       this.active = true;
     }
   },
+  mounted() {
+    const pageHeight = window.innerHeight
+    const topHeight = document.getElementById("top").clientHeight
+    const shrinkHeight = document.getElementsByClassName("shrink")[0].clientHeight
+    const bottomHeight = document.getElementById("bottom").clientHeight
+    this.middleHeight = pageHeight - topHeight - shrinkHeight - bottomHeight
+  }
 };
 </script>
 
@@ -190,7 +199,6 @@ export default {
 body {
   height: 100%;
   min-height: 100%;
-  overflow: hidden;
 }
 
 #app {
@@ -204,12 +212,10 @@ body {
 }
 
 #right {
-  height: 100%;
   flex-direction: column;
 
   display: grid;
   grid-template-columns: 50% 50%;
-
 }
 
 #middle > div:first-child {
@@ -240,10 +246,6 @@ body {
 .container {
   position: relative;
   padding: 8px;
-  height: 100%;
-}
-
-.md-layout-item {
   height: 100%;
 }
 
