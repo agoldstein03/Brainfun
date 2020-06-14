@@ -49,7 +49,7 @@ export default {
     const ex = this.lesson.charAt(4);
     this.$el.querySelector("#label").innerHTML =
       "Lesson " + lesson + " - Ex. " + ex*/
-      let [num1, num2] = this.prop.split('.');
+      let [num1, num2] = this.lesson.split('.');
       this.lessonNum = parseInt(num1);
       this.exercise = parseInt(num2);
   },

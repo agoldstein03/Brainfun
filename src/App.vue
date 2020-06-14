@@ -8,10 +8,10 @@
       <div class="md-layout-item">
         <div id="right" class="md-layout">
           <div class="md-layout-item">
-            <Directions :lessonData="lessonData" ref="directions" />
+            <Directions :lesson="lesson" :exercise="exercise" :lessonData="lessonData" ref="directions" />
           </div>
           <div id="console" class="md-layout-item">
-            <Console v-bind:code.sync="code" v-on:play="play" v-on:stop="forceStop" v-on:submit="submit" ref="console" />
+            <Console v-on:play="play" v-on:stop="forceStop" v-on:submit="submit" ref="console" />
           </div>
         </div>
       </div>
@@ -29,7 +29,7 @@
     </div>
 
     <div id="bottom">
-      <TapeVisualizer :checker="lessonData ? lessonData.checker : ''" :code="code" v-on:done="stop" :output="output" id="tape" ref="tape" />
+      <TapeVisualizer :checker="lessonData ? lessonData.checker : ''" :code="code" v-on:done="stop" :output.sync="output" id="tape" ref="tape" />
     </div>
     <Login ref="login" />
     <SubmitDialog v-on:nextLesson="nextLesson" :success="correct" :message="msg" ref="submit" />

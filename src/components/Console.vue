@@ -32,13 +32,16 @@ export default {
     Submit,
     Mark
   },
-  prop: [
-    'code'
-  ],
   data: function() {
     return {
       key: 0,
+      code: ""
     };
+  },
+  watch: {
+    code(val) {
+      this.$parent.code = val;
+    }
   },
   methods: {
     format: function() {

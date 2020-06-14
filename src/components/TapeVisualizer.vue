@@ -3,7 +3,7 @@
     <div class="content">
       <div class="md-display-1 arrow">
         <md-icon>arrow_downward</md-icon>
-        <md-button class="refresh md-icon-button md-raised md-primary">
+        <md-button @click="reset" class="refresh md-icon-button md-raised md-primary">
           <md-icon>refresh</md-icon>
         </md-button>
       </div>
@@ -44,7 +44,7 @@ export default {
   data: function() {
     return {
       grid: [],
-      shouldStop: false,
+      shouldStop: true,
       codePointer: 0,
       internalCode: "",
       //displayGrid: [],
@@ -93,9 +93,10 @@ export default {
     write() {
       this.$parent.getInput();
     },
-    writeValue(input) {
-      this.grid[this.pointer] = input ? (((input.charCodeAt(0) + 384) % 256) - 128) : 0;
-      window.setTimeout(this.ticks, 500);
+    rightValue(input) {
+      this.$set(this.grid, this.pointer, input ? (((input.charCodeAt(0) + 384) % 256) - 128) : 0);
+      this.incAndLoop();
+      window.setTimeout(this.tick.bind(this), 1000);
     },
     readButton() {
       this.read();
@@ -105,7 +106,8 @@ export default {
     },
     run() {
       this.codePointer = 0;
-      this.internalCode = this.code;
+      this.internalCode = this.$attrs.code;//this.clean(this.$attrs.code);
+      this.shouldStop = false;
       this.tick();
     },
     signalStop() {
@@ -118,59 +120,72 @@ export default {
       return {correct: false, reason: "A good reason"}
     },
     tick() {
-      switch (this.internalCode[this.codePointer]) {
-        case "+":
-          this.add()
-          break;
-        case "-":
-          this.subtract();
-          break;
-        case ">":
-          this.right();
-          break;
-        case "<":
-          this.left();
-          break;
-        case ".":
-          this.read();
-          break;
-        case ",":
-          this.write();
-          break;
-        case "[":
-          if (this.grid[this.pointer] == 0) {
-            let parens = 0;
-            while (!(this.internalCode[this.codePointer] == "]" && parens == 0)) {
-              if (this.internalCode[this.codePointer] == "]") {
-                parens++;
-              }
-              this.codePointer++;
-              if (this.codePointer >= this.internalCode.length) {
-                this.signalStop();
-                return;
-              }
-            }
-          }
-          break;
-        case "]":
-          if (this.grid[this.pointer] == 0) {
-            let parens = 0;
-            while (!(this.internalCode[this.codePointer] == "[" && parens == 0)) {
-              if (this.internalCode[this.codePointer] == "[") {
-                parens++;
-              }
-              this.codePointer--;
-              if (this.codePointer < 0) {
-                this.signalStop();
-                return;
+      console.log(this);
+      let skip = false;
+      if ("+-<>[],.".split('').includes(this.internalCode[this.codePointer])) {
+        switch (this.internalCode[this.codePointer]) {
+          case "+":
+            this.add()
+            break;
+          case "-":
+            this.subtract();
+            break;
+          case ">":
+            this.right();
+            break;
+          case "<":
+            this.left();
+            break;
+          case ".":
+            this.read();
+            break;
+          case ",":
+            this.write();
+            return;
+          case "[":
+            if (this.grid[this.pointer] == 0) {
+              let parens = 0;
+              while (!(this.internalCode[this.codePointer] == "]" && parens == 0)) {
+                if (this.internalCode[this.codePointer] == "]") {
+                  parens++;
+                }
+                this.codePointer++;
+                if (this.codePointer >= this.internalCode.length) {
+                  this.signalStop();
+                  return;
+                }
               }
             }
-          }
-          break;
+            break;
+          case "]":
+            if (this.grid[this.pointer] != 0) {
+              let parens = 0;
+              while (!(this.internalCode[this.codePointer] == "[" && parens == 0)) {
+                if (this.internalCode[this.codePointer] == "[") {
+                  parens++;
+                }
+                this.codePointer--;
+                if (this.codePointer < 0) {
+                  this.signalStop();
+                  return;
+                }
+              }
+            }
+            break;
+        }
+      } else {
+        skip = true;
       }
+      //console.log(this.codePointer);
+      this.incAndLoop(skip)
+      //console.log(!this.shouldStop,  this.codePointer < this.internalCode.length);
+    },
+    incAndLoop(skip) {
       this.codePointer++;
       if (!this.shouldStop && this.codePointer < this.internalCode.length) {
-        window.setTimeout(this.ticks, 500);
+        window.setTimeout(this.tick.bind(this), skip ? 0 : 1000);
+      } else if (!this.shouldStop) {
+        this.signalStop();
       }
     },
     reset() {
@@ -178,6 +193,9 @@ export default {
       this.pointer = 0;
       this.output = "";
     },
+    clean(stuff) {
+      return stuff.replace(/[^-+><[\]].,]/g, '');
+    }
 
   },
   computed: {
@@ -216,7 +234,7 @@ export default {
 
 .content {
   --transformTime: 1s;
-  overflow-x: hidden;
+  overflow: hidden;
 }
 
 .num-item {
@@ -325,7 +343,7 @@ export default {
 }
 
 .container {
-  overflow-x: hidden;
+  overflow: hidden;
 }
 
 </style>

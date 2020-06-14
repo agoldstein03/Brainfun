@@ -1,13 +1,14 @@
 <template>
     <div ref="backdrop" :style="this.marginProperties" :class="[ID + '-backdrop']">
-      <div :key="value" v-html="renderMarks(boundaries, value)" :class="[ID + '-highlights', ID + '-content']">
+      <div ref='highlights' :style="this.highlightProperties" :key="value" v-html="renderMarks(boundaries, value)" :class="[ID + '-highlights', ID + '-content']">
         
       </div>
     </div>
 </template>
 
 <script>
- 
+
+
 export default {
   name: "Mark",
   props: [
@@ -18,20 +19,47 @@ export default {
   data() {
     return {
       ID: 'hwt',
-      browser: this.detectBrowser(),
+      browser: "null",
       marginProperties: {},
+      highlightProperties: {},
       isGenerated: true,
       boundaries: [""]
     };
   },
   mounted() {
     //console.log({"el": this.el, "value": this.value})
+    this.browser = this.detectBrowser();
+    if (this.browser == "firefox") {
+      console.log(this, this.fixFirefox);
+      this.fixFirefox();
+    }
     this.handleInput();
     this.$el.addEventListener('scroll', this.blockContainerScroll.bind(this));
 		document.querySelector('#console .' + this.el).addEventListener('input', this.handleInput.bind(this));
     document.querySelector('#console .' + this.el).addEventListener('scroll', this.handleScroll.bind(this));
   },
   methods: {
+    
+
+  fixFirefox() {
+      // take padding and border pixels from highlights div
+      console.log(this.$refs.highlights);
+			const highlightsStyle = getComputedStyle(this.$refs.highlights);
+
+			let padding = ['padding-top', 'padding-right', 'padding-bottom', 'padding-left']
+				.map(p => highlightsStyle[p]);
+			let border = ['border-top-width', 'border-right-width', 'border-bottom-width', 'border-left-width']
+				.map(p => highlightsStyle[p]);
+
+			let marginPropertyNames = ['marginTop', 'marginRight', 'marginBottom', 'marginLeft'];
+
+			this.$set(this.highlightProperties, 'padding', 0);
+			this.$set(this.highlightProperties, 'borderWidth', 0);
+
+			marginPropertyNames.forEach((p, i) => {
+        this.$set(this.marginProperties, p, "calc(" + getComputedStyle(this.backdrop)[p] + " + " + padding[i] + " + " + border[i] + ")");
+			});
+		},
     handleInput: function() {
         let input = this.value;//document.querySelector('#console .' + this.el).value;
         let ranges = this.getRanges(input, this.config);//this.$el.getElementsByClassName(this.ID + '-highlights')[0]);
@@ -39,18 +67,19 @@ export default {
         this.boundaries = this.getBoundaries(unstaggeredRanges);
     },
     handleScroll: function() {
-      this.$refs.backdrop.scrollTop = document.querySelector('#console .' + this.el).scrollTop;
+      if (this.$refs.backdrop) {
+        this.$refs.backdrop.scrollTop = document.querySelector('#console .' + this.el).scrollTop;
 
-      // Chrome and Safari won't break long strings of spaces, which can cause
-      // horizontal scrolling, this compensates by shifting highlights by the
-      // horizontally scrolled amount to keep things aligned
-      let scrollLeft = document.querySelector('#console .' + this.el).scrollLeft;
-      this.$set(this.marginProperties, 'transform', (scrollLeft > 0) ? 'translateX(' + -scrollLeft + 'px)' : '');
+        // Chrome and Safari won't break long strings of spaces, which can cause
+        // horizontal scrolling, this compensates by shifting highlights by the
+        // horizontally scrolled amount to keep things aligned
+        let scrollLeft = document.querySelector('#console .' + this.el).scrollLeft;
+        this.$set(this.marginProperties, 'transform', (scrollLeft > 0) ? 'translateX(' + -scrollLeft + 'px)' : '');
+      }
     },
     detectBrowser: function() {
       let ua = window.navigator.userAgent.toLowerCase();
       if (ua.indexOf('firefox') !== -1) {
-        this.fixFirefox();
         return 'firefox';
       } else if (ua.match(/msie|trident\/7|edge/)) {
         return 'ie';
@@ -257,7 +286,7 @@ renderMarks(bounds, value) {
 			return 'other';
     }
     
-  }
+  },
 
 };
 

@@ -11,7 +11,16 @@
       </md-tab>
 
       <md-tab id="tab-hints" md-label="HINTS">
-        <p v-bind:style="styleObject">Qui, voluptas repellat impedit ducimus earum at ad architecto consectetur perferendis aspernatur iste amet ex tempora animi, illum tenetur quae assumenda iusto.</p>
+        <md-list>
+          <md-list-item v-for="(hint, i) in lessonData.hints" :key="i" md-expand>
+            <md-icon>lightbulb</md-icon>
+            <span class="md-list-item-text">Hint #{{ i+1 }}</span>
+
+            <md-list slot="md-expand">
+              <md-list-item class="md-inset">{{ hint }}</md-list-item>
+            </md-list>
+          </md-list-item>
+        </md-list>
       </md-tab>
     </md-tabs>
   </div>
@@ -22,7 +31,9 @@
 export default {
   name: "Directions",
   props: [
-    'lessonData'
+    'lessonData',
+    'lesson',
+    'exercise'
   ],
   data: function() {
     return {
@@ -30,10 +41,17 @@ export default {
         lineHeight: "25px",
         fontSize: "20px"
       },
-      lesson: this.$parent.lesson,
-      exercise: this.$parent.exercise,
+      //hints: [],
       //realLessonData: this.lessonData.doc(this.lesson+"."+this.exercise)
     };
+  },
+  created() {
+    //this.hints = data.hints;
+  },
+  watch: {
+    //lessonData(data) {
+    //  this.hints = data.hints;
+    //}
   },
   methods: {
     // changeExercise(lesson, ex) {
