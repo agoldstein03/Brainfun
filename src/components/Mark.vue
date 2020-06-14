@@ -45,7 +45,7 @@ export default {
       // horizontal scrolling, this compensates by shifting highlights by the
       // horizontally scrolled amount to keep things aligned
       let scrollLeft = document.querySelector('#console .' + this.el).scrollLeft;
-      this.marginProperties['transform'] = (scrollLeft > 0) ? 'translateX(' + -scrollLeft + 'px)' : '';
+      this.$set(this.marginProperties, 'transform', (scrollLeft > 0) ? 'translateX(' + -scrollLeft + 'px)' : '');
     },
     detectBrowser: function() {
       let ua = window.navigator.userAgent.toLowerCase();
@@ -377,7 +377,7 @@ let HighlightWithinTextarea = function(el, config) {
 }
 
 .hwt-content, .md-textarea {
-	border: 1px solid;
+	//border: 1px solid;
 	background: none transparent !important;
 }
 
