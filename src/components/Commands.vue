@@ -129,6 +129,7 @@ export default {
 }
 
 .md-button {
-  background-color: white;
+  background-color: white !important;
+  color: black !important;
 }
 </style>

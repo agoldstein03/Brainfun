@@ -68,21 +68,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "~vue-material/dist/theme/engine"; // Import the theme engine
-
-@include md-register-theme(
-  "default",
-  (
-    primary: md-get-palette-color(white, A100),
-    // The primary color of your application
-      accent: md-get-palette-color(red, A200) // The accent or secondary color,
-  )
-);
-
-@import "~vue-material/dist/theme/all"; // Apply the theme
-
 .md-title {
-  color: white;
+  color: white !important;
 }
 
 .md-toolbar {
