@@ -7,6 +7,11 @@ import 'vue-material/dist/theme/default.css'
 
 Vue.config.productionTip = false
 
+import { firestorePlugin } from 'vuefire'
+ 
+Vue.use(firestorePlugin)
+
+
 Vue.use(MdButton)
 Vue.use(MdToolbar)
 Vue.use(MdList)

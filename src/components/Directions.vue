@@ -2,7 +2,7 @@
   <div class="container">
     <md-tabs  class="md-transparent" md-alignment="fixed">
       <md-tab id="tab-task" md-label="TASK" exact>
-        <h1>1 - Getting Started</h1>
+        <h1>{{ this.$parent.lesson }} - {{ lessonData.lessonTitle }}</h1>
       </md-tab>
 
       <md-tab id="tab-references" md-label="REFERENCES">
@@ -17,11 +17,17 @@
 </template>
 
 <script>
+
 export default {
   name: "Directions",
+  props: [
+    'lessonData'
+  ],
   data: function() {
     return {
-      text: "",
+      lesson: this.$parent.lesson,
+      exercise: this.$parent.exercise,
+      //realLessonData: this.lessonData.doc(this.lesson+"."+this.exercise)
     };
   },
   methods: {
