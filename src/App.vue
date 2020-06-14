@@ -45,7 +45,12 @@ export default {
   data: function() {
     return {
       correct: true,
-      msg: "You failed!"
+      msg: "You failed!",
+      lesson: 2,
+      exercise: 1,
+      lessons: null,
+      lessonData: null,
+      //realLessonData: this.lessonData.doc(this.lesson+"."+this.exercise)
     };
   },
   components: {
@@ -60,15 +65,6 @@ export default {
   //firestore: {
   //  lessons: db.collection('lessons'),
   //},
-  data() {
-    return {
-      lesson: 2,
-      exercise: 1,
-      lessons: null,
-      lessonData: null,
-      //realLessonData: this.lessonData.doc(this.lesson+"."+this.exercise)
-    }
-  },
   watch: {
     lesson: {
       // call it upon creation too

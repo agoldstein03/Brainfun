@@ -1,6 +1,12 @@
 <template>
   <div class="container">
     <div class="content">
+      <div class="md-display-1 arrow">
+        <md-icon>arrow_downward</md-icon>
+        <md-button class="refresh md-icon-button md-raised md-primary">
+          <md-icon>refresh</md-icon>
+        </md-button>
+      </div>
       <transition-group name="cells" tag="div" :class="{cells: true, 'up': up, 'down': !up}">
         <span class="md-display-3 cell" v-for="{value, originalIndex} in displayGrid" :key="originalIndex">
           <transition name="num">
@@ -9,7 +15,6 @@
           <div class="md-subheading sub">{{ originalIndex }}</div>
         </span>
       </transition-group>
-      <div class="md-display-1 arrow">^</div>
     </div>
   </div>
 </template>
@@ -95,6 +100,11 @@ export default {
   width: 100%;
   text-align: center;
   z-index: 1;
+  margin-bottom: 5px;
+}
+
+.refresh {
+  background-color: #ff8327 !important;
 }
 
 .sub {
