@@ -2,11 +2,10 @@
   <div class="container">
     <md-field id="editor" class=".hwt-container codeContainer">
       <!-- <p id="formatted" class="code" spellcheck="false"></p> -->
-      <Mark v-bind:config="{highlight: [{highlight: '+', className: 'one'},{highlight: '-', className: 'two'},{highlight: '>', className: 'three'},{highlight: '<', className: 'four'},{highlight: '[', className: 'five'},{highlight: ']', className: 'six'},{highlight: '.', className: 'seven'},{highlight: ',', className: 'eight'}]}" el="md-textarea" v-bind:value="code"/>
+      <Mark :key="key" v-bind:config="{highlight: [{highlight: '+', className: 'one'},{highlight: '-', className: 'two'},{highlight: '>', className: 'three'},{highlight: '<', className: 'four'},{highlight: '[', className: 'five'},{highlight: ']', className: 'six'},{highlight: '.', className: 'seven'},{highlight: ',', className: 'eight'}]}" el="md-textarea" v-bind:value="code"/>
       <md-textarea
         spellcheck="false"
         class="code"
-        :key="key"
         md-autogrow
         v-model="code"
         @input="format()"
@@ -61,6 +60,7 @@ export default {
   },
   methods: {
     format: function() {
+      this.key++;
       /*let formatted = ``;
       for (const c of this.code) {
         const index = this.commands.indexOf(c)
