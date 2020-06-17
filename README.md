@@ -1,5 +1,5 @@
 # BrainFun
-Recieved Honorable Mention at Same Home Different Hacks 2020. Teammates: Adam Goldstein, Tyler Lin, and Peter Ganunis. 
+Recieved Honorable Mention at Same Home Different Hacks 2020. Teammates: Keshav Ganapathy, Adam Goldstein, Tyler Lin, and Peter Ganunis. 
 ## Project setup
 ```
 npm install
