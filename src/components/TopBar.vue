@@ -92,7 +92,7 @@ export default {
 <style lang="scss" scoped>
 
 .md-toolbar {
-  height: 10vh;
+  //height: 10vh;
   background-color: #fafafa !important;
 }
 
@@ -138,5 +138,9 @@ export default {
 #logo {
   margin-left: 1vw;
   width: 150px;
+}
+
+.topbar, .topbar > div {
+  height: 100%;
 }
 </style>
