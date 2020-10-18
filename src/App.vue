@@ -268,7 +268,8 @@ body {
 }
 
 #top {
-  flex: 0 0;
+  flex: 0 auto;
+  flex-basis: 7.5vh;
   //height: 10vh;
 }
 
